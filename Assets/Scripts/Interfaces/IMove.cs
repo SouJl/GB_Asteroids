@@ -4,6 +4,6 @@ namespace GB_Asteroids
 {
     public interface IMove
     {
-        void Move(Vector3 input);
+        void Move(Vector2 input);
     }
 }

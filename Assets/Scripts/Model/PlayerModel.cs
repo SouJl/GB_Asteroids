@@ -21,12 +21,12 @@ namespace GB_Asteroids
             Hp = view.Hp;
         }
 
-        public void Move(Vector3 input)
+        public void Move(Vector2 input)
         {
             var deltaTime = Time.deltaTime;
             var speed = deltaTime * Speed;
-            _move.Set(Input.GetAxis("Horizontal") * speed, Input.GetAxis("Vertical")
-            * speed, 0.0f);
+
+            _move.Set(input.x * speed, input.y * speed, 0.0f);
             Transform.localPosition += _move;
         }
     }

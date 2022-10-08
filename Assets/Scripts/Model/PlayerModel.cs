@@ -2,32 +2,45 @@ using UnityEngine;
 
 namespace GB_Asteroids 
 {
-    public class PlayerModel : IMove
+    public class PlayerModel : AbstractUnit
     {
         private Transform _transform;
-        private float _speed;
+        private float _pitchMult;
+        private float _rollMult;
+
         private float _hp;
 
-        public float Speed { get => _speed; set => _speed = value; }
         public float Hp { get => _hp; set => _hp = value; }
         public Transform Transform { get => _transform; set => _transform = value; }
-
-        private Vector3 _move;
+        public float PitchMult { get => _pitchMult; set => _pitchMult = value; }
+        public float RollMult { get => _rollMult; set => _rollMult = value; }
 
         public PlayerModel(PlayerView view) 
         {
             Transform = view.transform;
             Speed = view.Speed;
+            PitchMult = view.PitchMult;
+            RollMult = view.RollMult;
             Hp = view.Hp;
         }
 
-        public void Move(Vector2 input)
+        protected override void ChangePosotion(Vector2 input)
         {
-            var deltaTime = Time.deltaTime;
-            var speed = deltaTime * Speed;
+            float xAxis = input.x;
+            float yAxis = input.y;
 
-            _move.Set(input.x * speed, input.y * speed, 0.0f);
-            Transform.localPosition += _move;
+            var pos = Transform.position;
+            pos.x += xAxis * Speed * Time.deltaTime;
+            pos.y += yAxis * Speed * Time.deltaTime;
+            Transform.position = pos;
+        }
+
+        protected override void ChangeRotation(Vector2 input)
+        {
+            float xAxis = input.x;
+            float yAxis = input.y;
+
+            Transform.rotation = Quaternion.Euler(yAxis * PitchMult, xAxis * RollMult, 0);
         }
     }
 }

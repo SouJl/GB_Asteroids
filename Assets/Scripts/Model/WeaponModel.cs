@@ -24,7 +24,8 @@ namespace GB_Asteroids
 
         public void Fire()
         {
-            Debug.Log("Fire");
+            var bullet = ProcessesSingleton.Instance.SpawnObject(BulletPrefab, FirePoint.position);
+            bullet.GetComponent<Rigidbody>().AddForce(FirePoint.up * 500, ForceMode.Force);
         }   
     }
 }

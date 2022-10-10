@@ -12,7 +12,7 @@ namespace GB_Asteroids
         PlayerAction _inputActions;
         
         private InputAction _move;
-
+        private InputAction _fire;
 
         public PlayerController(PlayerView view)
         {
@@ -22,7 +22,10 @@ namespace GB_Asteroids
             _inputActions = new PlayerAction();
 
             _move = _inputActions.Player.Movement;
-            
+            _fire = _inputActions.Player.Fire;
+
+            _fire.performed += d => _playerModel.Shoot();
+
             OnEnable();
         }
 
@@ -34,11 +37,13 @@ namespace GB_Asteroids
         private void OnEnable()
         {
             _move.Enable();
+            _fire.Enable();
         }
 
         private void OnDisable()
         {
             _move.Disable();
+            _fire.Disable();
         }
 
         ~PlayerController() => OnDisable();

@@ -5,43 +5,40 @@ namespace GB_Asteroids
     public class PlayerModel : AbstractUnit
     {
         private Transform _transform;
-        private float _pitchMult;
-        private float _rollMult;
+        private float _rotationSpeed;
 
         private float _hp;
 
         public float Hp { get => _hp; set => _hp = value; }
         public Transform Transform { get => _transform; set => _transform = value; }
-        public float PitchMult { get => _pitchMult; set => _pitchMult = value; }
-        public float RollMult { get => _rollMult; set => _rollMult = value; }
+        public float RotationSpeed { get => _rotationSpeed; set => _rotationSpeed = value; }
+
+        private IWeapon _weapon;
+        private IEngine _engine;
 
         public PlayerModel(PlayerView view) 
         {
             Transform = view.transform;
             Speed = view.Speed;
-            PitchMult = view.PitchMult;
-            RollMult = view.RollMult;
+            RotationSpeed = view.RotationSpeed;
+
             Hp = view.Hp;
+
+            _weapon = new WeaponModel(view.Weapon);
+            _engine = new EngineModel(view.Engine);
         }
 
         protected override void ChangePosotion(Vector2 input)
         {
-            float xAxis = input.x;
-            float yAxis = input.y;
-
-            var pos = Transform.position;
-            pos.x += xAxis * Speed * Time.deltaTime;
-            pos.y += yAxis * Speed * Time.deltaTime;
-            Transform.position = pos;
+            _engine.AddForce(Transform.up * input.y);
         }
 
         protected override void ChangeRotation(Vector2 input)
         {
-            float xAxis = input.x;
-            float yAxis = input.y;
-
-            Transform.rotation = Quaternion.Euler(yAxis * PitchMult, xAxis * RollMult, 0);
+            Transform.Rotate(Vector3.back * input.x * RotationSpeed * Time.deltaTime);
         }
+
+        public void Shoot() => _weapon.Fire();
     }
 }
 

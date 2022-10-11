@@ -35,6 +35,16 @@ namespace GB_Asteroids
         }
 
         public void Shoot() => _weapon.Fire();
+
+        public void TakeDamage(float amount)
+        {
+            Hp -= amount;
+
+            if (Hp <= 0)
+            {
+                Debug.Log("Player is Dead");
+            }
+        }
     }
 }
 

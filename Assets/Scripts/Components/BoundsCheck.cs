@@ -1,9 +1,5 @@
 using UnityEngine;
 
-/// <summary>
-/// Предотвращает выход объекта за границы экрана.
-/// Важно: работает только с ортогр. кмерой в [0,0,0]
-/// </summary>
 public class BoundsCheck : MonoBehaviour
 {
     [Header("Set in Inspector")]
@@ -11,12 +7,8 @@ public class BoundsCheck : MonoBehaviour
     public bool keepOnScreen = true;
 
     [Header("Set Dynamically")]
-    public bool isOnScreen = true;
     public float camWidth;
     public float camHeight;
-
-    [HideInInspector]
-    public bool offRight, offLeft, offUp, offDown;
 
     private void Awake()
     {
@@ -26,40 +18,14 @@ public class BoundsCheck : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (!keepOnScreen) return;
+
         var pos = transform.position;
-        isOnScreen = true;
-        offRight = offLeft = offUp = offDown = false;
+       
+        pos.x = Mathf.Clamp(pos.x, (-camWidth + radius), (camWidth - radius));     
+        pos.y = Mathf.Clamp(pos.y, (-camHeight + radius), (camHeight - radius));
 
-        if (pos.x > camWidth - radius)
-        {
-            pos.x = camWidth - radius;
-            offRight = true;
-        }
-        if (pos.x < -camWidth + radius)
-        {
-            pos.x = -camWidth + radius;
-            offLeft = true;
-        }
-
-        if (pos.y > camHeight - radius)
-        {
-            pos.y = camHeight - radius;
-            offUp = true;
-        }
-        if (pos.y < -camHeight + radius)
-        {
-            pos.y = -camHeight + radius;
-            offDown = true;
-        }
-
-        isOnScreen = !(offRight || offLeft || offUp || offDown);
-
-        if (keepOnScreen && !isOnScreen)
-        {
-            transform.position = pos;
-            isOnScreen = true;
-            offRight = offLeft = offUp = offDown = false;
-        }
+        transform.position = pos;
     }
 
     private void OnDrawGizmos()

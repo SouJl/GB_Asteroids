@@ -3,35 +3,50 @@ using UnityEngine;
 public class BoundsCheck : MonoBehaviour
 {
     [Header("Set in Inspector")]
-    public float radius = 1f;
-    public bool keepOnScreen = true;
+    [SerializeField]private float _radius = 1f;
+    [SerializeField]private bool _keepOnScreen = true;
 
-    [Header("Set Dynamically")]
-    public float camWidth;
-    public float camHeight;
+    private float _camWidth;
+    private float _camHeight;
 
-    private void Awake()
+    public float Radius { get => _radius; set => _radius = value; }
+    public float CamWidth { get => _camWidth; private set => _camWidth = value; }
+    public float CamHeight { get => _camHeight; private set => _camHeight = value; }
+
+    void Awake()
     {
-        camHeight = Camera.main.orthographicSize;
-        camWidth = camHeight * Camera.main.aspect;
+        CamHeight = Camera.main.orthographicSize;
+        CamWidth = CamHeight * Camera.main.aspect;
     }
 
-    private void LateUpdate()
+    void LateUpdate()
     {
-        if (!keepOnScreen) return;
+        if (!_keepOnScreen) return;
 
         var pos = transform.position;
        
-        pos.x = Mathf.Clamp(pos.x, (-camWidth + radius), (camWidth - radius));     
-        pos.y = Mathf.Clamp(pos.y, (-camHeight + radius), (camHeight - radius));
+        pos.x = Mathf.Clamp(pos.x, (-CamWidth + Radius), (CamWidth - Radius));     
+        pos.y = Mathf.Clamp(pos.y, (-CamHeight + Radius), (CamHeight - Radius));
 
         transform.position = pos;
+    }
+
+    public bool IsOutOfBounds() 
+    {
+        if (_keepOnScreen) return false;
+
+        var pos = transform.position;
+
+        if (pos.x > CamWidth || pos.x < -CamWidth) return true;
+        if (pos.y > CamHeight || pos.y < -CamHeight) return true;
+
+        return false;
     }
 
     private void OnDrawGizmos()
     {
         if (!Application.isPlaying) return;
-        var boundSize = new Vector3(camWidth * 2, camHeight * 2, 0.1f);
+        var boundSize = new Vector3(CamWidth * 2, CamHeight * 2, 0.1f);
         Gizmos.DrawWireCube(Vector3.zero, boundSize);
     }
 }

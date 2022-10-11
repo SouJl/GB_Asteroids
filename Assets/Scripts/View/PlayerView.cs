@@ -2,28 +2,26 @@ using UnityEngine;
 
 namespace GB_Asteroids 
 {
-    [RequireComponent(typeof(EngineView))]
+    [RequireComponent(typeof(EngineView), typeof(RotatorView))]
     public class PlayerView : MonoBehaviour
     {
-        [Header("Movement settings")]
-        [SerializeField] private float _speed;
-        [SerializeField] private float _rotationSpeed = 20f;
-
-        [SerializeField] private float _hp;
+        [SerializeField] private float _hp = 150f;
 
         private EngineView _engine;
         private WeaponView _weapon;
+        private RotatorView _rotator;
 
-        public float Speed { get => _speed; set => _speed = value; }
-        public float RotationSpeed { get => _rotationSpeed; set => _rotationSpeed = value; }
         public float Hp { get => _hp; set => _hp = value; }
-        public WeaponView Weapon { get => _weapon; set => _weapon = value; }
-        public EngineView Engine { get => _engine; set => _engine = value; }
+        
+        public WeaponView Weapon { get => _weapon; private set => _weapon = value; }
+        public EngineView Engine { get => _engine; private set => _engine = value; }
+        public RotatorView Rotator { get => _rotator; private set => _rotator = value; }
 
         private void Awake()
         {
             Weapon = GetComponent<WeaponView>();
             Engine = GetComponent<EngineView>();
+            Rotator = GetComponent<RotatorView>();
         }
     }
 }

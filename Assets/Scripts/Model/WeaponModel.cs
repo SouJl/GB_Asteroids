@@ -4,19 +4,19 @@ namespace GB_Asteroids
 {
     public class WeaponModel : IWeapon
     {
-        private float _damage;
+        private float _fireForce;
         private int _fireRate;
         private Transform _firePoint;
         private GameObject _bulletPrefab;
 
-        public float Damage { get => _damage; set => _damage = value; }
         public int FireRate { get => _fireRate; set => _fireRate = value; }
         public Transform FirePoint { get => _firePoint; set => _firePoint = value; }
         public GameObject BulletPrefab { get => _bulletPrefab; set => _bulletPrefab = value; }
+        public float FireForce { get => _fireForce; set => _fireForce = value; }
 
         public WeaponModel(WeaponView view) 
         {
-            Damage = view.Damage;
+            FireForce = view.FireForce;
             FireRate = view.FireRate;
             FirePoint = view.FirePoint;
             BulletPrefab = view.Bullet;
@@ -25,7 +25,7 @@ namespace GB_Asteroids
         public void Fire()
         {
             var bullet = ProcessesSingleton.Instance.SpawnObject(BulletPrefab, FirePoint.position);
-            bullet.GetComponent<Rigidbody>().AddForce(FirePoint.up * 500, ForceMode.Force);
+            bullet.GetComponent<BulletView>().Rigidbody.AddForce(FirePoint.up * FireForce, ForceMode.Force);
         }   
     }
 }

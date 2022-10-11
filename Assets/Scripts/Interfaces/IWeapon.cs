@@ -4,7 +4,7 @@ namespace GB_Asteroids
 {
     public interface IWeapon
     {
-        float Damage { get; set; }
+        float FireForce { get; set; }
         int FireRate { get; set; }
 
         Transform FirePoint { get; set; }

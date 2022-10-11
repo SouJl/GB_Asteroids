@@ -2,8 +2,8 @@
 
 namespace GB_Asteroids
 {
-    public interface IMove
+    public interface IRotation
     {
-        void Move(Vector2 input);
+        void Rotate(Vector3 input);
     }
 }

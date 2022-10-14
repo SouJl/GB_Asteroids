@@ -5,11 +5,15 @@ namespace GB_Asteroids
 {
     public class ProcessesSingleton : MonoBehaviour
     {
-        public static ProcessesSingleton Instance;
+        public static ProcessesSingleton Instance { get; private set; }
 
-        private void Awake()
+        void Awake()
         {
-            if (Instance == null)
+            if (Instance != null && Instance != this)
+            {
+                Destroy(this);
+            }
+            else
             {
                 Instance = this;
             }

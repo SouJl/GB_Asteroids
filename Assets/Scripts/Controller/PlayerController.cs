@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -5,14 +6,16 @@ namespace GB_Asteroids
 {
     public class PlayerController : IExecute
     {
-        PlayerModel _playerModel;
+        private PlayerModel _playerModel;
      
-        PlayerView _playerView;
+        private PlayerView _playerView;
 
         PlayerAction _inputActions;
         
         private InputAction _move;
         private InputAction _fire;
+
+        public PlayerModel Player { get => _playerModel; }
 
         public PlayerController(PlayerView view)
         {

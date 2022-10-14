@@ -4,12 +4,11 @@ namespace GB_Asteroids
 {
     public class PlayerModel : AbstractUnit
     {
-        private Transform _transform;
-        private float _hp;
-
-        public float Hp { get => _hp; set => _hp = value; }
+        private Transform _transform;      
         public Transform Transform { get => _transform; set => _transform = value; }
-
+       
+        public HealthModel Health { get; set; }
+        
         private IWeapon _weapon;
         private IEngine _engine;
         private IRotation _rotator;
@@ -17,11 +16,12 @@ namespace GB_Asteroids
         public PlayerModel(PlayerView view) 
         {
             Transform = view.transform;
-            Hp = view.Hp;
+            Health = new HealthModel(view.Hp);
 
             _weapon = new WeaponModel(view.Weapon);
             _engine = new EngineModel(view.Engine);
             _rotator = new RotatorModel(view.Rotator, Transform);
+
         }
 
         protected override void ChangePosotion(Vector2 input)
@@ -34,17 +34,17 @@ namespace GB_Asteroids
             _rotator.Rotate(Vector3.back * input.x);
         }
 
-        public void Shoot() => _weapon.Fire();
+        public void Shoot() 
+        { 
+            _weapon.Fire();
+            TakeDamage(20);
+        }
 
         public void TakeDamage(float amount)
         {
-            Hp -= amount;
-
-            if (Hp <= 0)
-            {
-                Debug.Log("Player is Dead");
-            }
+            Health.ChangeCurrentHp(Health.CurrentHealth - amount);
         }
+
     }
 }
 

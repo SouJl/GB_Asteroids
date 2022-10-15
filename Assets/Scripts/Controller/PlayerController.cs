@@ -27,7 +27,7 @@ namespace GB_Asteroids
             _move = _inputActions.Player.Movement;
             _fire = _inputActions.Player.Fire;
 
-            _fire.performed += d => _playerModel.Shoot();
+            _fire.performed += _ => _playerModel.Shoot();
 
             OnEnable();
         }

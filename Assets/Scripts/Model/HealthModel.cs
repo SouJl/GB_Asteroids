@@ -24,7 +24,7 @@ namespace GB_Asteroids
             }
         }
 
-        public Action<bool> EndOfHpAction { get; set; }
+        public Action<bool> EndOfHpAction  = delegate (bool state) { };
 
         public HealthModel(float maxHealth) 
         {

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.045497544, g: 0.041600414, b: 0.039306205, a: 1}
+  m_IndirectSpecularColor: {r: 0.045462362, g: 0.041695178, b: 0.03926602, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 145065762}
   - component: {fileID: 145065764}
   - component: {fileID: 145065760}
-  - component: {fileID: 145065763}
+  - component: {fileID: 145065765}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -186,7 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f944d0926f247c141ae66b46c888c106, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fireForce: 500
+  _fireForce: 800
   _fireRate: 4
   _bullet: {fileID: 4263571537527904613, guid: f25412ec2037b884f9b7e55c4cba8ec4, type: 3}
   _firePoint: {fileID: 339566878}
@@ -221,20 +221,6 @@ MonoBehaviour:
   _power: 6
   _forceMode: 0
   _rigidbody: {fileID: 145065761}
---- !u!114 &145065763
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 145065757}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2d1143feb0961d4d899f451d4cac6f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _radius: 1
-  _keepOnScreen: 1
 --- !u!114 &145065764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,6 +234,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rotationSpeed: 180
+--- !u!114 &145065765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 145065757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2d1143feb0961d4d899f451d4cac6f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _radius: 2
+  _keepOnScreen: 1
 --- !u!1 &285000086
 GameObject:
   m_ObjectHideFlags: 0
@@ -980,6 +980,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2068885916}
+  - component: {fileID: 2068885917}
   m_Layer: 0
   m_Name: Components
   m_TagString: Untagged
@@ -1002,3 +1003,15 @@ Transform:
   m_Father: {fileID: 285000088}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2068885917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2068885915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42928d06bcd84f94fb51504f39a69cb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

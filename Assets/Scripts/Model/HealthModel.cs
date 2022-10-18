@@ -19,7 +19,7 @@ namespace GB_Asteroids
                 {
                     _currentHealth = Mathf.Clamp(value, 0, MaxHealth);
                    
-                    Debug.Log(CurrentHealth);
+                    if(_currentHealth == 0) EndOfHpAction?.Invoke(false);
                 }
             }
         }
@@ -34,10 +34,7 @@ namespace GB_Asteroids
 
         public void ChangeCurrentHp(float amount)
         {
-            CurrentHealth = amount;
-
-            if (CurrentHealth <= 0)
-                EndOfHpAction?.Invoke(false);
+            CurrentHealth = amount;              
         }
     }
 }

@@ -2,11 +2,20 @@
 
 namespace GB_Asteroids.Enemy
 {
-    public class AsteroidModel : EnemyModel
+    public class AsteroidModel : IEnemy
     {
-        public AsteroidModel(Transform transform, float maxHeath) : base(transform, maxHeath)
-        {
+        private HealthModel _health;
+        
+        public HealthModel Health { get => _health; set => _health = value; }
 
+        public void DealDamage()
+        {
+            
+        }
+
+        public void TakeDamage(float amount)
+        {
+            Health.ChangeCurrentHp(Health.CurrentHealth - amount);
         }
     }
 }

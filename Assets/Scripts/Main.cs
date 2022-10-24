@@ -10,14 +10,13 @@ namespace GB_Asteroids
         [SerializeField] private EnemyFactory _enemyFactory;
 
         private PlayerController _playerController;
-
+        private EnemyController _enemyController;
         void Start()
         {
             _playerController = new PlayerController(_playerView);
             _playerController.Player.Health.EndOfHpAction += GameOver;
 
-            _enemyFactory.CreateEnemy(EnemyType.Asteroid);
-            _enemyFactory.CreateEnemy(EnemyType.EnemyShip);
+            _enemyController = new EnemyController(_enemyFactory);
         }
 
         void Update()

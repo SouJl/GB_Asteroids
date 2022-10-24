@@ -5,9 +5,7 @@ namespace GB_Asteroids
 {
     public class EnemyFactory : MonoBehaviour, IEnemyFactory
     {
-        [SerializeField] private GameObject _asteroid;
-        
-        [SerializeField] private GameObject _enemyShip;
+        [SerializeField] private EnemyConfig _asteroid, _enemyShip;
 
         [SerializeField] private Vector3 _startPosition;
 
@@ -19,15 +17,19 @@ namespace GB_Asteroids
             {
                 case EnemyType.Asteroid:
                     {
-                        Instantiate(_asteroid, _startPosition + _offset, Quaternion.identity);
-                        _offset = new Vector3(Random.Range(-10, 10), 0, 0);
-                        return new AsteroidModel();
+                        Vector3 spawnDir = Random.insideUnitSphere.normalized * 10;
+                        var obj = Instantiate(_asteroid.Prefab, spawnDir, Quaternion.identity);
+                        var view = obj.GetComponent<EnemyView>();
+                        AsteroidModel asteroidModel = new AsteroidModel(_asteroid, view.Transform);
+                        view.Interact += asteroidModel.Interaction;
+                        obj.GetComponent<Rigidbody>().AddForce(Quaternion.identity * -spawnDir);
+                        return asteroidModel;
                     }
                 case EnemyType.EnemyShip:
                     {
-                        Instantiate(_enemyShip, _startPosition + _offset, Quaternion.identity);
+                        var obj = Instantiate(_enemyShip.Prefab, _startPosition + _offset, Quaternion.identity);
                         _offset = new Vector3(Random.Range(-10, 10), 0, 0);
-                        return new EnemyShipModel();
+                        return new EnemyShipModel(_enemyShip, obj.transform);
                     }
                 default:
                     return null;

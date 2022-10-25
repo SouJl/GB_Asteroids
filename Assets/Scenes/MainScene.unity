@@ -526,7 +526,7 @@ MonoBehaviour:
   _asteroidsSpawner:
     _factory: {fileID: 11400000, guid: 023597092726e51429145e8e554575f9, type: 2}
     _spawnDistance: 20
-    spawnRate: 2
+    spawnRate: 6
     amountPerSpawn: 1
     trajectoryVariance: 15
 --- !u!1 &705507993

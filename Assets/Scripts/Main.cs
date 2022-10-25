@@ -11,6 +11,8 @@ namespace GB_Asteroids
 
         private PlayerController _playerController;
         private EnemyController _enemyController;
+
+
         void Start()
         {
             _playerController = new PlayerController(_playerView);

@@ -49,7 +49,7 @@ namespace GB_Asteroids.Enemy
             if(collider.tag == "Bullet") 
             {
                 TakeDamage(10);
-                UnityEngine.Object.Destroy(collider.gameObject);
+                collider.GetComponent<BulletView>().DestroyBullet();
             }
         }
 

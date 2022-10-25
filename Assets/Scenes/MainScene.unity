@@ -523,8 +523,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _transform: {fileID: 673188834}
   _collider: {fileID: 0}
+  _enemyFactory: {fileID: 11400000, guid: 4e64c44bfe228a741bb14d9817396566, type: 2}
   _asteroidsSpawner:
-    _factory: {fileID: 11400000, guid: 023597092726e51429145e8e554575f9, type: 2}
     _spawnDistance: 20
     spawnRate: 6
     amountPerSpawn: 1

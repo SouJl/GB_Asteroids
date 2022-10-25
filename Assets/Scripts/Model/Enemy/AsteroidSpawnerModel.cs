@@ -20,13 +20,12 @@ namespace GB_Asteroids
 
         private Transform _rootTransform;
 
-        public AsteroidSpawnerModel(AsteroidSpawnView spawnView, Transform rootTransform) 
+        public AsteroidSpawnerModel(IEnemyFactory factory, AsteroidSpawnView spawnView, Transform rootTransform) 
         {
-            _factory = spawnView.Factory;
-            SpawnDistance = spawnView.SpawnDistance;
-           
-            SpawnRate = spawnView.SpawnRate;
+            _factory = factory;
 
+            SpawnDistance = spawnView.SpawnDistance;           
+            SpawnRate = spawnView.SpawnRate;
             AmountPerSpawn = spawnView.AmountPerSpawn;
             TrajectoryVariance = spawnView.TrajectoryVariance;
 
@@ -44,7 +43,7 @@ namespace GB_Asteroids
                 var postion = GetPosition();
                 var rotation = GetRotation();
 
-                AsteroidModel asteroid = (AsteroidModel)_factory.Create(postion, rotation);
+                var asteroid = _factory.Create(EnemyType.Asteroid, postion, rotation);
 
                 asteroid.SetTrajectory(rotation * -postion);
             }

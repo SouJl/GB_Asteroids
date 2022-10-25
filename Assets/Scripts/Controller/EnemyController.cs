@@ -21,7 +21,7 @@ namespace GB_Asteroids
         {
             spawners = new List<ISpawner>();
 
-            spawners.Add(new AsteroidSpawnerModel(_enemySpawner.AsteroidsSpawner, _enemySpawner.Transform));
+            spawners.Add(new AsteroidSpawnerModel(_enemySpawner.EnemyFactory, _enemySpawner.AsteroidsSpawner, _enemySpawner.Transform));
         }
 
         public void Execute()

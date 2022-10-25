@@ -4,8 +4,6 @@ namespace GB_Asteroids
 {
     public interface IEnemyFactory
     {
-        EnemyConfig Config { get; set; }
-
-        IEnemy Create(Vector3 position, Quaternion rotation);
+        IEnemy Create(EnemyType type, Vector3 position, Quaternion rotation);
     }
 }

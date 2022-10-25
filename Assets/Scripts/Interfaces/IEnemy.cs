@@ -1,4 +1,5 @@
-﻿
+﻿using UnityEngine;
+
 namespace GB_Asteroids
 {
     public interface IEnemy
@@ -8,6 +9,8 @@ namespace GB_Asteroids
         public EnemyType Type { get; }
 
         HealthModel Health { get; set; }
+
+        void SetTrajectory(Vector3 direction);
 
         void DealDamage();
 

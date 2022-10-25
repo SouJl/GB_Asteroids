@@ -15,10 +15,11 @@ namespace GB_Asteroids.Enemy
         public EnemyType Type { get => _type; }
 
         public HealthModel Health { get => _health; set => _health = value; }
-        
-        private Transform _transform;
 
-        public EnemyShipModel(EnemyConfig config, Transform transform)
+        private Transform _transform;
+        private Rigidbody _rigidbody;
+
+        public EnemyShipModel(EnemyConfig config, EnemyView view)
         {
             _type = config.Type;
             Damage = config.Damage;
@@ -26,7 +27,15 @@ namespace GB_Asteroids.Enemy
 
             Health = new HealthModel(config.MaxHealth);
 
-            _transform = transform;
+            _transform = view.transform;
+            _rigidbody = view.RigidBody;
+            view.Interact += Interaction;
+        }
+
+
+        public void SetTrajectory(Vector3 direction)
+        {
+            _rigidbody.MovePosition(direction * 10);
         }
 
         public void DealDamage()
@@ -37,6 +46,15 @@ namespace GB_Asteroids.Enemy
         public void TakeDamage(float amount)
         {
             Health.ChangeCurrentHp(Health.CurrentHealth - amount);
+        }
+
+        public void Interaction(Collider collider)
+        {
+            if (collider.tag == "Bullet")
+            {
+                TakeDamage(10);
+                collider.GetComponent<BulletView>().DestroyBullet();
+            }
         }
     }
 }

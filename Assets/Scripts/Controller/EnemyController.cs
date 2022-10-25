@@ -7,12 +7,16 @@ namespace GB_Asteroids
     public class EnemyController : IExecute
     {
         private EnemySpawnerView _enemySpawner;
-
+        
+        private Transform _target;
+        
         private List<ISpawner> spawners;
 
-        public EnemyController(EnemySpawnerView spawnerView) 
+
+        public EnemyController(EnemySpawnerView spawnerView, Transform target) 
         {
             _enemySpawner = spawnerView;
+            _target = target;
 
             InitSpawners();
         }
@@ -22,6 +26,7 @@ namespace GB_Asteroids
             spawners = new List<ISpawner>();
 
             spawners.Add(new AsteroidSpawnerModel(_enemySpawner.EnemyFactory, _enemySpawner.AsteroidsSpawner, _enemySpawner.Transform));
+            spawners.Add(new EnenemyShipSpawnerModel(_enemySpawner.EnemyFactory, _enemySpawner.EnemyShipSpawner, _target));
         }
 
         public void Execute()
@@ -30,7 +35,14 @@ namespace GB_Asteroids
             {
                 spawner.TimeBeforeSpawn += Time.deltaTime;
                 spawner.Spawn();
+                
+                if(spawner is EnenemyShipSpawnerModel ships)
+                {
+                    ships.Move();
+                }
             }
+
+
         }
     }
 }

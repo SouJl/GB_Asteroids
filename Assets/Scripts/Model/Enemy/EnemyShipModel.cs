@@ -35,7 +35,9 @@ namespace GB_Asteroids.Enemy
 
         public void SetTrajectory(Vector3 direction)
         {
-            _rigidbody.MovePosition(direction * 10);
+            Vector3 target = (direction - _transform.position).normalized;
+            _rigidbody.MovePosition(_transform.position + target * 15 * Time.deltaTime);
+            //_rigidbody.MoveRotation(Quaternion.LookRotation(_transform.position - direction));
         }
 
         public void DealDamage()

@@ -18,7 +18,7 @@ namespace GB_Asteroids
             _playerController = new PlayerController(_playerView);
             _playerController.Player.Health.EndOfHpAction += GameOver;
 
-            _enemyController = new EnemyController(_enemySpawner);
+            _enemyController = new EnemyController(_enemySpawner, _playerView.transform);
         }
 
         void Update()

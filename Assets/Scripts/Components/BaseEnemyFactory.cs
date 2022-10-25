@@ -23,7 +23,7 @@ namespace GB_Asteroids
                 case EnemyType.EnemyShip:
                     {
                         var obj = Instantiate(_enemyShip.Prefab, position, rotation);
-                        return new AsteroidModel(_enemyShip, obj.GetComponent<EnemyView>());
+                        return new EnemyShipModel(_enemyShip, obj.GetComponent<EnemyView>());
                     }
                 default:
                     return null;

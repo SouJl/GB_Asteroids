@@ -22,8 +22,9 @@ namespace GB_Asteroids.Enemy
         public HealthModel Health { get => _health; set => _health = value; }
 
         private Transform _transform;
+        private Rigidbody _rigidbody;
 
-        public AsteroidModel(EnemyConfig config, Transform transform) 
+        public AsteroidModel(EnemyConfig config, EnemyView view) 
         {
             Name = config.Name;
             _type = config.Type;
@@ -32,7 +33,14 @@ namespace GB_Asteroids.Enemy
 
             Health = new HealthModel(config.MaxHealth);
 
-            _transform = transform;
+            _transform = view.transform;
+            _rigidbody = view.RigidBody;
+            view.Interact += Interaction;
+        }
+
+        public void SetTrajectory(Vector3 direction)
+        {
+            _rigidbody.AddForce(direction * 10);
         }
 
 

@@ -1,7 +1,11 @@
-﻿namespace GB_Asteroids
+﻿using UnityEngine;
+
+namespace GB_Asteroids
 {
     public interface IEnemyFactory
     {
-        IEnemy CreateEnemy(EnemyType type);
+        EnemyConfig Config { get; set; }
+
+        IEnemy Create(Vector3 position, Quaternion rotation);
     }
 }

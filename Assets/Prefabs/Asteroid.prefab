@@ -65,6 +65,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _transform: {fileID: 3062272631829195053}
   _collider: {fileID: 279094349192755324}
+  _rigidBody: {fileID: 0}
 --- !u!54 &-2938128351254637424
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -79,8 +80,8 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_Constraints: 56
+  m_CollisionDetection: 1
 --- !u!1 &3089617637738428976
 GameObject:
   m_ObjectHideFlags: 0

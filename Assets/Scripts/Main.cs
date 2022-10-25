@@ -7,7 +7,7 @@ namespace GB_Asteroids
     {
         [SerializeField] private PlayerView _playerView;
         
-        [SerializeField] private EnemyFactory _enemyFactory;
+        [SerializeField] private EnemySpawnerView _enemySpawner;
 
         private PlayerController _playerController;
         private EnemyController _enemyController;
@@ -16,12 +16,13 @@ namespace GB_Asteroids
             _playerController = new PlayerController(_playerView);
             _playerController.Player.Health.EndOfHpAction += GameOver;
 
-            _enemyController = new EnemyController(_enemyFactory);
+            _enemyController = new EnemyController(_enemySpawner);
         }
 
         void Update()
         {
             _playerController.Execute();
+            _enemyController.Execute();
         }
 
         private void GameOver(bool state)

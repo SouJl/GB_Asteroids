@@ -1,22 +1,36 @@
 ﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace GB_Asteroids
 {
     public class EnemyController : IExecute
     {
-        IEnemyFactory EnemyFactory;
+        private EnemySpawnerView _enemySpawner;
 
-        public EnemyController(IEnemyFactory enemyFactory) 
+        private List<ISpawner> spawners;
+
+        public EnemyController(EnemySpawnerView spawnerView) 
         {
-            EnemyFactory = enemyFactory;
+            _enemySpawner = spawnerView;
 
-            EnemyFactory.CreateEnemy(EnemyType.Asteroid);
-            EnemyFactory.CreateEnemy(EnemyType.Asteroid);
+            InitSpawners();
+        }
+
+        private void InitSpawners()
+        {
+            spawners = new List<ISpawner>();
+
+            spawners.Add(new AsteroidSpawnerModel(_enemySpawner.AsteroidsSpawner, _enemySpawner.Transform));
         }
 
         public void Execute()
         {
-            throw new NotImplementedException();
+            foreach(var spawner in spawners)
+            {
+                spawner.TimeBeforeSpawn += Time.deltaTime;
+                spawner.Spawn();
+            }
         }
     }
 }

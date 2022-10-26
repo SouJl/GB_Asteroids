@@ -9,22 +9,32 @@ namespace GB_Asteroids
         
         [SerializeField] private EnemySpawnerView _enemySpawner;
 
+        private ListExecuteController _executeUpdate;
+
         private PlayerController _playerController;
         private EnemyController _enemyController;
 
 
         void Start()
         {
+            _executeUpdate = new ListExecuteController();
+
             _playerController = new PlayerController(_playerView);
             _playerController.Player.Health.EndOfHpAction += GameOver;
+            _executeUpdate.AddExecuteObject(_playerController);
 
             _enemyController = new EnemyController(_enemySpawner, _playerView.transform);
+            _executeUpdate.AddExecuteObject(_enemyController);
         }
 
         void Update()
         {
-            _playerController.Execute();
-            _enemyController.Execute();
+            while (_executeUpdate.MoveNext())
+            {
+                IExecute tmp = (IExecute)_executeUpdate.Current;
+                tmp.Execute();
+            }
+            _executeUpdate.Reset();
         }
 
         private void GameOver(bool state)

@@ -23,6 +23,16 @@ namespace GB_Asteroids
             Engine = GetComponent<EngineView>();
             Rotator = GetComponent<RotatorView>();
         }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (collision.gameObject.CompareTag("Enemy")) 
+            {
+                Rigidbody rbdy = gameObject.GetComponent<Rigidbody>();
+                rbdy.velocity = Vector3.zero;
+                rbdy.angularVelocity = Vector3.zero;
+            }
+        }
     }
 }
 

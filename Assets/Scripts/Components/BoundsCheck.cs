@@ -12,6 +12,7 @@ public class BoundsCheck : MonoBehaviour
     public float Radius { get => _radius; set => _radius = value; }
     public float CamWidth { get => _camWidth; private set => _camWidth = value; }
     public float CamHeight { get => _camHeight; private set => _camHeight = value; }
+    public bool KeepOnScreen { get => _keepOnScreen; set => _keepOnScreen = value; }
 
     void Awake()
     {
@@ -21,7 +22,7 @@ public class BoundsCheck : MonoBehaviour
 
     void LateUpdate()
     {
-        if (!_keepOnScreen) return;
+        if (!KeepOnScreen) return;
 
         var pos = transform.position;
        
@@ -33,7 +34,7 @@ public class BoundsCheck : MonoBehaviour
 
     public bool IsOutOfBounds() 
     {
-        if (_keepOnScreen) return false;
+        if (KeepOnScreen) return false;
 
         var pos = transform.position;
 

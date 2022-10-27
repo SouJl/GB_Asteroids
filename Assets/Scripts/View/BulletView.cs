@@ -15,7 +15,7 @@ namespace GB_Asteroids
         public Rigidbody Rigidbody { get => _rigidbody; set => _rigidbody = value; }
         public IViewService ViewService { get => viewService; set => viewService = value; }
 
-        void Awake()
+        private void Awake()
         {
             Rigidbody = GetComponent<Rigidbody>();
             _boundsCheck = GetComponent<BoundsCheck>();

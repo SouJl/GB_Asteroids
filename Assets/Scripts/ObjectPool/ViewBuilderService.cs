@@ -9,9 +9,9 @@ namespace GB_Asteroids
     {
         private readonly Dictionary<string, BuiderPool> _viewCashe;
 
-        public ViewBuilderService(int capasity)
+        public ViewBuilderService()
         {
-            _viewCashe = new Dictionary<string, BuiderPool>(capasity);
+            _viewCashe = new Dictionary<string, BuiderPool>();
         }
 
         public T Instantiate<T>(Object prefab, Transform initPos = null)

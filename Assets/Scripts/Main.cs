@@ -26,6 +26,8 @@ namespace GB_Asteroids
 
             _enemyController = new EnemyController(_enemySpawner, _playerView.transform);
             _executeUpdate.AddExecuteObject(_enemyController);
+
+            ServiceLocator.SetService<IViewService>(new ViewBuilderService());
         }
 
         void Update()

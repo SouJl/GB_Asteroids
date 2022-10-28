@@ -11,13 +11,13 @@ namespace GB_Asteroids
         private readonly Transform _root;
         private readonly Transform _instancePosition;
 
-        public BuiderPool(GameObject gameobject, Transform parent = null)
+        public BuiderPool(GameObject gameobject, Transform initPos = null)
         {
             _prefab = gameobject;
             _root = new GameObject($"[{_prefab.name}]").transform;
-            if (parent != null)
+            if (initPos != null)
             {
-                _instancePosition = parent;
+                _instancePosition = initPos;
             }
         }
 

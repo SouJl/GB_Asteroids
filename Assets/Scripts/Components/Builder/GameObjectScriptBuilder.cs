@@ -6,11 +6,6 @@ namespace GB_Asteroids.Builder
     {
         public GameObjectScriptBuilder(GameObject gameObject) : base(gameObject) { }
 
-        public GameObjectScriptBuilder SetMainView<S>() where S: MonoBehaviour
-        {
-            var component = GetOrAddComponent<S>();
-            return this;
-        }
 
         public GameObjectScriptBuilder BoundsCheck(bool keepOnScreen) 
         {

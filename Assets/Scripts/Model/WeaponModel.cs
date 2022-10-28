@@ -16,7 +16,6 @@ namespace GB_Asteroids
         public float FireForce { get => _fireForce; set => _fireForce = value; }
 
         private IViewService _viewService;
-        private GameObjectBuilder _builder;
 
         public WeaponModel(WeaponView view) 
         {
@@ -25,35 +24,17 @@ namespace GB_Asteroids
             FirePoint = view.FirePoint;
             BulletConfig = view.BulletConfig;
 
-            _viewService = new ViewService(20);
-            _builder = new GameObjectBuilder();
+            _viewService = new ViewBuilderService(20);
+
         }
 
         public void Fire()
-        {
-            var bulletPref = BuildBullet(BulletConfig);
-           
-            var bullet = _viewService.Instantiate<BulletView>(bulletPref, FirePoint);
+        {         
+            var bullet = _viewService.Instantiate<Transform>(BulletConfig, FirePoint);
 
-            bullet.ViewService = _viewService;
-
-            bullet.Rigidbody.AddForce(FirePoint.up * FireForce, ForceMode.Force);
+            BulletView view = bullet.gameObject.AddComponent<BulletView>();
+            view.ViewService = _viewService;
+            view.Rigidbody.AddForce(FirePoint.up * FireForce, ForceMode.Force);
         }   
-
-        private GameObject BuildBullet(SimpleObjectConfig config)
-        {
-            return _builder
-                .Visual
-                .Size(config.Size)
-                .Name(config.Name)
-                .MeshFilter(config.Mesh)
-                .MeshRenderer(config.Material)
-                .Physics
-                .Rigidbody(config.RigidProperies)
-                .SphereCollider(1)
-                .Script
-                .SetMainView<BulletView>()
-                .BoundsCheck(false);
-        }
     }
 }

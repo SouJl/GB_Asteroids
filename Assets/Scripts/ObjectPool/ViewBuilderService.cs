@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace GB_Asteroids
 {
@@ -13,12 +14,14 @@ namespace GB_Asteroids
             _viewCashe = new Dictionary<string, BuiderPool>(capasity);
         }
 
-        public T Instantiate<T>(GameObject prefab, Transform initPos = null)
+        public T Instantiate<T>(Object prefab, Transform initPos = null)
         {
-            if (!_viewCashe.TryGetValue(prefab.name, out BuiderPool viewPool))
+            var config  = prefab as SimpleObjectConfig;
+
+            if (!_viewCashe.TryGetValue(config.Name, out BuiderPool viewPool))
             {
-                viewPool = new BuiderPool(prefab, initPos);
-                _viewCashe[prefab.name] = viewPool;
+                viewPool = new BuiderPool(config, initPos);
+                _viewCashe[config.Name] = viewPool;
             }
 
             if (viewPool.Pop().TryGetComponent(out T component))

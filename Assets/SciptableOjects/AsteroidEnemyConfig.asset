@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Asteroid
   Type: 1
-  MaxHealth: 100
+  MaxHealth: 40
   Damage: 20
   Points: 20
   Prefab: {fileID: 151664, guid: fa49e460baf435b4780da7196c2ab473, type: 3}

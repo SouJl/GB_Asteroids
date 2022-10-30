@@ -58,6 +58,7 @@ namespace GB_Asteroids
                 .Visual
                 .Size(config.Size)
                 .Name(config.Name)
+                .Tag(config.Tag)
                 .MeshFilter(config.Mesh)
                 .MeshRenderer(config.Material)
                 .Physics

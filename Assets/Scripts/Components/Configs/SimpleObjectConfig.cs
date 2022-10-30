@@ -7,6 +7,7 @@ namespace GB_Asteroids
     public class SimpleObjectConfig : ScriptableObject
     {
         public string Name;
+        public string Tag;
         public float Size;
 
         [Header("Mesh Properties")]

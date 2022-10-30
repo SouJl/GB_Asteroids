@@ -18,9 +18,9 @@ namespace GB_Asteroids.Enemy
         public float Damage { get => _damage; set => _damage = value; }
         public float Points { get => _points; set => _points = value; }
 
-
         public HealthModel Health { get => _health; set => _health = value; }
 
+        private EnemyView _view;
         private Transform _transform;
         private Rigidbody _rigidbody;
 
@@ -32,10 +32,15 @@ namespace GB_Asteroids.Enemy
             Points = config.Points;
 
             Health = new HealthModel(config.MaxHealth);
+            
+            _view = view;
+            
+            Health.EndOfHpAction += _view.Defeat;
+           
+            _transform = _view.transform;
+            _rigidbody = _view.RigidBody;
+            _view.Interact += Interaction;
 
-            _transform = view.transform;
-            _rigidbody = view.RigidBody;
-            view.Interact += Interaction;
         }
 
         public void SetTrajectory(Vector3 direction)
@@ -63,5 +68,7 @@ namespace GB_Asteroids.Enemy
             Health.ChangeCurrentHp(Health.CurrentHealth - amount);
             Debug.Log($"{Name} Hp = {Health.CurrentHealth}");
         }
+
+       
     }
 }

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: BulletConfig
   m_EditorClassIdentifier: 
   Name: Bullet
+  Tag: Bullet
   Size: 0.5
   Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
   Material: {fileID: 2100000, guid: 3e299cd310e479640a654a271e378b6e, type: 2}

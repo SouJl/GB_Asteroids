@@ -22,5 +22,10 @@ namespace GB_Asteroids
         {
             Interact?.Invoke(other);
         }
+
+        public void Defeat(bool state)
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

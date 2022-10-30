@@ -18,6 +18,12 @@ namespace GB_Asteroids.Builder
             return this;
         }
 
+        public GameObjectVisualBuilder Tag(string tag)
+        {
+            _gameObject.tag = tag;
+            return this;
+        }
+
         public GameObjectVisualBuilder MeshFilter(Mesh mesh)
         {
             var component = GetOrAddComponent<MeshFilter>();

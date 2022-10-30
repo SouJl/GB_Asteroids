@@ -11,6 +11,8 @@ namespace GB_Asteroids
 
         [SerializeField] private EnemyConfig _enemyShip;
 
+
+
         public override IEnemy Create(EnemyType type, Vector3 position, Quaternion rotation)
         {
             switch (type) 

@@ -14,7 +14,7 @@ namespace GB_Asteroids
             _viewCashe = new Dictionary<string, ObjectPool>();
         }
 
-        public T Instantiate<T>(GameObject prefab, Transform initPos = null)
+        public T Instantiate<T>(GameObject prefab, Vector3 initPos)
         {
             if(!_viewCashe.TryGetValue(prefab.name, out ObjectPool viewPool)) 
             {

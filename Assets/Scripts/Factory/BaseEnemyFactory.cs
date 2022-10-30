@@ -11,15 +11,15 @@ namespace GB_Asteroids
 
         [SerializeField] private EnemyConfig _enemyShip;
 
-
-
         public override IEnemy Create(EnemyType type, Vector3 position, Quaternion rotation)
         {
             switch (type) 
             {
                 case EnemyType.Asteroid: 
                     {
-                        var obj = Instantiate(_asteroid.Prefab, position, rotation);
+
+                        var obj = ServiceLocator.Resolve<IViewService>().Instantiate<Transform>(_asteroid.Prefab, position);
+                        //var obj = Instantiate(_asteroid.Prefab, position, rotation);
                         return new AsteroidModel(_asteroid, obj.GetComponent<EnemyView>());
                     }
                 case EnemyType.EnemyShip:

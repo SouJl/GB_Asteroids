@@ -10,9 +10,9 @@ namespace GB_Asteroids
         private readonly Stack<GameObject> _stack = new Stack<GameObject>();
         private readonly GameObject _prefab;
         private readonly Transform _root;
-        private readonly Transform _instancePosition;
+        private readonly Vector3 _instancePosition;
 
-        public ObjectPool(GameObject prefab, Transform initPos = null)
+        public ObjectPool(GameObject prefab, Vector3 initPos)
         {
             _prefab = prefab;
             _root = new GameObject($"[{_prefab.name}]").transform;
@@ -27,14 +27,14 @@ namespace GB_Asteroids
             GameObject go;
             if(_stack.Count == 0) 
             {
-                go = Object.Instantiate(_prefab, _instancePosition.position, Quaternion.identity);
+                go = Object.Instantiate(_prefab, _instancePosition, Quaternion.identity);
 
                 go.name = _prefab.name;
             }
             else 
             {
                 go = _stack.Pop();
-                go.transform.position = _instancePosition.position;
+                go.transform.position = _instancePosition;
             }
             go.SetActive(true);
             go.transform.SetParent(null);

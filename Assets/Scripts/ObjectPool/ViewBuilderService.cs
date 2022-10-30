@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace GB_Asteroids
 {
-    public class ViewBuilderService: IViewService
+    public class ViewBuilderService: IViewBuilderService
     {
         private readonly Dictionary<string, BuiderPool> _viewCashe;
 
@@ -14,10 +13,8 @@ namespace GB_Asteroids
             _viewCashe = new Dictionary<string, BuiderPool>();
         }
 
-        public T Instantiate<T>(Object prefab, Transform initPos = null)
+        public T Instantiate<T>(SimpleObjectConfig config, Transform initPos = null)
         {
-            var config  = prefab as SimpleObjectConfig;
-
             if (!_viewCashe.TryGetValue(config.Name, out BuiderPool viewPool))
             {
                 viewPool = new BuiderPool(config, initPos);

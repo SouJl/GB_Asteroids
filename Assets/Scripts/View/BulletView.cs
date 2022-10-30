@@ -32,7 +32,7 @@ namespace GB_Asteroids
         public void DestroyBullet() 
         {
             Rigidbody.velocity = Vector3.zero;
-            ServiceLocator.Resolve<IViewService>().Destroy(gameObject);
+            ServiceLocator.Resolve<IViewBuilderService>().Destroy(gameObject);
         }
 
     }

@@ -26,7 +26,7 @@ namespace GB_Asteroids
 
         public void Fire()
         {         
-            var bullet = ServiceLocator.Resolve<IViewService>().Instantiate<Transform>(BulletConfig, FirePoint);
+            var bullet = ServiceLocator.Resolve<IViewBuilderService>().Instantiate<Transform>(BulletConfig, FirePoint);
 
             BulletView view = bullet.gameObject.AddComponent<BulletView>();
 

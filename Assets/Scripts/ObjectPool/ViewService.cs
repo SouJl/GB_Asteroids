@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace GB_Asteroids
 {
@@ -15,11 +14,11 @@ namespace GB_Asteroids
             _viewCashe = new Dictionary<string, ObjectPool>();
         }
 
-        public T Instantiate<T>(Object prefab, Transform initPos = null)
+        public T Instantiate<T>(GameObject prefab, Transform initPos = null)
         {
             if(!_viewCashe.TryGetValue(prefab.name, out ObjectPool viewPool)) 
             {
-                viewPool = new ObjectPool(prefab as GameObject, initPos);
+                viewPool = new ObjectPool(prefab, initPos);
                 _viewCashe[prefab.name] = viewPool;
             }
 

@@ -44,7 +44,7 @@ namespace GB_Asteroids
                 var postion = GetPosition();
                 var rotation = GetRotation();
 
-                var asteroid = _factory.Create(EnemyType.Asteroid, postion, rotation);
+                var asteroid = _factory.Create(EnemyType.Asteroid, postion, rotation).Clone();
 
                 asteroid.SetTrajectory(rotation * -postion);
             }

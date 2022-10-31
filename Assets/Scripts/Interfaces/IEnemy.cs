@@ -15,5 +15,7 @@ namespace GB_Asteroids
         void DealDamage();
 
         void TakeDamage(float amount);
+
+        IEnemy Clone();
     }
 }

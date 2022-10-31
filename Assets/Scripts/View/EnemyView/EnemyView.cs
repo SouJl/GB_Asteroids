@@ -25,7 +25,8 @@ namespace GB_Asteroids
 
         public void Defeat(bool state)
         {
-            ServiceLocator.Resolve<IViewService>().Destroy(gameObject);
+            gameObject.SetActive(false);
+            //ServiceLocator.Resolve<IViewService>().Destroy(gameObject);
         }
     }
 }

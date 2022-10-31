@@ -58,5 +58,10 @@ namespace GB_Asteroids.Enemy
                 collider.GetComponent<BulletView>().DestroyBullet();
             }
         }
+
+        public IEnemy Clone()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

@@ -44,7 +44,7 @@ namespace GB_Asteroids
                 var postion = GetPosition();
                 var rotation = GetRotation();
 
-                var enemy = _factory.Create(EnemyType.EnemyShip, postion, rotation);
+                var enemy = _factory.Create(EnemyType.EnemyShip, postion, rotation).Clone();
 
                 enemyShips.Add(enemy);
             }

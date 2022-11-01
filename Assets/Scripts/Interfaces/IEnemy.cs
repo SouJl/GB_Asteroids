@@ -8,13 +8,13 @@ namespace GB_Asteroids
         public float Points { get; set; }
         public EnemyType Type { get; }
 
-        HealthModel Health { get; set; }
+        HealthModel Health { get;}
 
         void SetTrajectory(Vector3 direction);
 
         void DealDamage();
 
-        void TakeDamage(float amount);
+        void TakeDamage(float amout);
 
         IEnemy Clone();
     }

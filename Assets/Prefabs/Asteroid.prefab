@@ -233,8 +233,8 @@ GameObject:
   m_Component:
   - component: {fileID: 494976}
   - component: {fileID: 5444550}
-  - component: {fileID: 7751446688690547597}
   - component: {fileID: 8577095908098657899}
+  - component: {fileID: 2515471982683901678}
   m_Layer: 0
   m_Name: Asteroid
   m_TagString: Enemy
@@ -274,21 +274,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 8
   m_CollisionDetection: 1
---- !u!114 &7751446688690547597
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 151664}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 009aca737f8fd764f88b7020fa6d4127, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _transform: {fileID: 494976}
-  _collider: {fileID: 0}
-  _rigidBody: {fileID: 5444550}
 --- !u!135 &8577095908098657899
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -302,3 +287,18 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2515471982683901678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 151664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 009aca737f8fd764f88b7020fa6d4127, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _transform: {fileID: 0}
+  _collider: {fileID: 0}
+  _rigidBody: {fileID: 0}

@@ -14,11 +14,11 @@ namespace GB_Asteroids
             _viewCashe = new Dictionary<string, ObjectPool>();
         }
 
-        public T Instantiate<T>(GameObject prefab, Vector3 initPos)
+        public T Instantiate<T>(GameObject prefab)
         {
             if(!_viewCashe.TryGetValue(prefab.name, out ObjectPool viewPool)) 
             {
-                viewPool = new ObjectPool(prefab, initPos);
+                viewPool = new ObjectPool(prefab);
                 _viewCashe[prefab.name] = viewPool;
             }
 

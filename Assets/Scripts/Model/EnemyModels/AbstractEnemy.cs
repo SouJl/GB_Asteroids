@@ -15,6 +15,7 @@ namespace GB_Asteroids
         private HealthModel _health;
         private EnemyView _view;
         private Rigidbody _rigidbody;
+        private Transform _transform;
 
         public string Name { get => _name; set => _name = value; }
         public EnemyType Type { get => _type; private set => _type = value; }
@@ -22,10 +23,24 @@ namespace GB_Asteroids
         public float Damage { get => _damage; set => _damage = value; }
         public float Points { get => _points; set => _points = value; }
         public float MaxHealth { get => _maxHealth; set => _maxHealth = value; }
+        public Rigidbody Rigidbody { get => _rigidbody; set => _rigidbody = value; }
 
         public HealthModel Health { get => _health; private set => _health = value; }
-        public Rigidbody Rigidbody { get => _rigidbody; private set => _rigidbody = value; }
         public EnemyView View { get => _view; private set => _view = value; }
+        public Transform Transform { get => _transform;  set => _transform = value; }
+
+        public AbstractEnemy(EnemyView view)
+        {
+            //Name = view.name;
+            Type = view.Type;
+            Damage = view.Damage;
+            Points = view.Points;
+            MaxHealth = view.MaxHealth;
+
+            Health = new HealthModel(MaxHealth);
+            
+            //View = view;
+        }
 
         public AbstractEnemy(EnemyConfig config, EnemyView view) 
         {
@@ -53,10 +68,10 @@ namespace GB_Asteroids
 
             Health = new HealthModel(MaxHealth);
 
-            View = source.View;
+      /*      View = source.View;
             Health.EndOfHpAction += View.Defeat;
             Rigidbody = View.RigidBody;
-            View.Interact += Interaction;
+            View.Interact += Interaction;*/
         }
 
         public abstract IEnemy Clone();

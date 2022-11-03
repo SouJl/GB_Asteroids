@@ -1,10 +1,20 @@
 ﻿using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace GB_Asteroids.Enemy
 {
     public class AsteroidModel : AbstractEnemy
     {
+        private float _size;
+        private float maxSize;
+
+        public float Size { get => _size; set => _size = value; }
+
+        public AsteroidModel(AsteroidView view) : base(view) 
+        {
+            Size = view.Size;
+        }
 
         public AsteroidModel(EnemyConfig config, EnemyView view):base(config, view) 
         {

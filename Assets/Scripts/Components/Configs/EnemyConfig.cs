@@ -8,6 +8,9 @@ namespace GB_Asteroids
         public string Name;
         public EnemyType Type;
 
+        public float MinSize;
+        public float MaxSize;
+
         public float MaxHealth;
         public float Damage;
         public float Points;

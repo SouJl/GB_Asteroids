@@ -38,8 +38,12 @@ namespace GB_Asteroids
             MaxHealth = view.MaxHealth;
 
             Health = new HealthModel(MaxHealth);
-            
-            //View = view;
+
+            View = view;
+            Rigidbody = View.RigidBody;
+            Transform = View.Transform;
+            View.Interact += Interaction;
+            Health.EndOfHpAction += View.Defeat;
         }
 
         public AbstractEnemy(EnemyConfig config, EnemyView view) 
@@ -60,6 +64,12 @@ namespace GB_Asteroids
 
         public AbstractEnemy(AbstractEnemy source) 
         {
+            View = source.View.Clone();
+
+            Rigidbody = View.RigidBody;
+            Transform = View.Transform;
+            View.Interact += Interaction;
+
             Name = source.Name;
             Type = source.Type;
             Damage = source.Damage;
@@ -67,11 +77,6 @@ namespace GB_Asteroids
             MaxHealth = source.MaxHealth;
 
             Health = new HealthModel(MaxHealth);
-
-      /*      View = source.View;
-            Health.EndOfHpAction += View.Defeat;
-            Rigidbody = View.RigidBody;
-            View.Interact += Interaction;*/
         }
 
         public abstract IEnemy Clone();

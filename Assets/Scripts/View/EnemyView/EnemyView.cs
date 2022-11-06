@@ -23,6 +23,8 @@ namespace GB_Asteroids
 
         public event Action<Collider> Interact;
 
+        private int _cloneCount = 0;
+
         protected override void Awake()
         {
             base.Awake();
@@ -43,6 +45,54 @@ namespace GB_Asteroids
         {
             Destroy(gameObject);
             //ServiceLocator.Resolve<IViewService>().Destroy(gameObject);
+        }
+
+
+        public EnemyView Clone() 
+        {
+            _cloneCount += 1;
+
+            var newObject = new GameObject($"{name}");
+
+            newObject.tag = tag;
+
+            if (gameObject.TryGetComponent<MeshFilter>(out var meshFilter)) 
+            {
+                var newMeshFilter = newObject.AddComponent<MeshFilter>();
+                newMeshFilter.mesh = meshFilter.mesh;
+            }
+
+            if (gameObject.TryGetComponent<MeshRenderer>(out var meshRenderer))
+            {
+                var newMeshRenderer = newObject.AddComponent<MeshRenderer>();
+                newMeshRenderer.material = meshRenderer.material;
+            }
+
+            if (gameObject.TryGetComponent<Rigidbody>(out var rigidbody))
+            {
+                var newRigidbody = newObject.AddComponent<Rigidbody>();
+                newRigidbody.mass = rigidbody.mass;
+                newRigidbody.drag = rigidbody.drag;
+                newRigidbody.angularDrag = rigidbody.angularDrag;
+                newRigidbody.useGravity = rigidbody.useGravity;
+                newRigidbody.isKinematic = rigidbody.isKinematic;
+
+                /*newRigidbody.velocity = rigidbody.velocity;*/
+                newRigidbody.angularVelocity = rigidbody.angularVelocity;
+
+                newRigidbody.constraints = rigidbody.constraints;
+            }
+
+            if (gameObject.TryGetComponent<SphereCollider>(out var sphereCollider))
+            {
+                var newSphereCollider = newObject.AddComponent<SphereCollider>();
+                newSphereCollider.radius = sphereCollider.radius;
+                newSphereCollider.isTrigger = sphereCollider.isTrigger;
+            }
+
+            newObject.transform.position = transform.position;
+
+            return newObject.AddComponent<EnemyView>();
         }
     }
 }

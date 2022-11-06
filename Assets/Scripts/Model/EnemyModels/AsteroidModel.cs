@@ -7,13 +7,15 @@ namespace GB_Asteroids.Enemy
     public class AsteroidModel : AbstractEnemy
     {
         private float _size;
-        private float maxSize;
+        private float _minSize;
 
         public float Size { get => _size; set => _size = value; }
+        public float MinSize { get => _minSize;}
 
         public AsteroidModel(AsteroidView view) : base(view) 
         {
             Size = view.Size;
+            _minSize = view.MinSize;
         }
 
         public AsteroidModel(EnemyConfig config, EnemyView view):base(config, view) 
@@ -23,7 +25,7 @@ namespace GB_Asteroids.Enemy
 
         public AsteroidModel(AsteroidModel source) : base(source) 
         {
-
+            _minSize = source.MinSize;
         }
         
         public override void SetTrajectory(Vector3 direction)

@@ -5,10 +5,12 @@ namespace GB_Asteroids
     public class AsteroidView: EnemyView
     {
         [SerializeField] private float _size;
-        [SerializeField] private float maxSize;
+        
+        private float _minSize;
 
         public float Size { get => _size; set => _size = value; }
-        
+        public float MinSize { get => _minSize; set => _minSize = value; }
+
         protected override void Awake()
         {
             base.Awake();

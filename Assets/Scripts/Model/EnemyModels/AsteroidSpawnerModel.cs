@@ -46,21 +46,17 @@ namespace GB_Asteroids
 
             for (int i = 0; i < AmountPerSpawn; i++)
             {
-                var postion = GetPosition();
+                var position = GetPosition();
                 var rotation = GetRotation();
 
                 // var asteroid = _factory.Create(EnemyType.Asteroid, postion, rotation).Clone();
 
-                var asteroid = _factory.CreateView(EnemyType.Asteroid, postion, rotation);
+                var asteroid = _factory.CreateView(EnemyType.Asteroid, position, rotation);
                 AsteroidModel asteroidModel = new AsteroidModel(asteroid as AsteroidView);
                 
                 asteroidModel.Health.EndOfHpAction += Split;
-                asteroidModel.Health.EndOfHpAction += asteroid.Defeat;
-                asteroidModel.Transform = asteroid.Transform;
-                asteroidModel.Rigidbody = asteroid.RigidBody;
-                asteroid.Interact += asteroidModel.Interaction;
 
-                asteroidModel.SetTrajectory(rotation * -postion);
+                asteroidModel.SetTrajectory(rotation * -position);
 
                 asteroids.Add(asteroidModel);
             }
@@ -85,35 +81,47 @@ namespace GB_Asteroids
 
         private void Split(bool state)
         {
-            var asteroid = asteroids.Where(a => a.Health.CurrentHealth == 0).First();
-            
-            CreateSplit(asteroid);
-            CreateSplit(asteroid);
+            var asteroid = asteroids.Where(a => a.Health.CurrentHealth == 0).First() as AsteroidModel;
+
+            if ((asteroid.Size * 0.5f ) < asteroid.MinSize)
+            {
+                asteroids.Remove(asteroid);
+                return;
+            }
+
+            for (int i = 0; i < 2; i++) 
+            {
+                var newAsteroid = CreateSplit(asteroid);
+
+                newAsteroid.SetTrajectory(Random.insideUnitCircle.normalized * 20);
+                
+                asteroids.Add(newAsteroid);
+            }
 
             asteroids.Remove(asteroid);
         }
 
-        private void CreateSplit(AbstractEnemy asteroid)
+        private AsteroidModel CreateSplit(AsteroidModel asteroid)
         {
             Vector2 position = asteroid.Transform.position;
-            position += Random.insideUnitCircle * 0.5f;
 
-            var halfAsteroidView = _factory.CreateView(EnemyType.Asteroid, position, Quaternion.identity);
+            var rotation = GetRotation();
 
-            asteroid.MaxHealth *= 0.5f;
-            
-            var halfAsteroid = asteroid.Clone() as AbstractEnemy;
+            var halfAsteroid = asteroid.Clone() as AsteroidModel;
+            float newSize = asteroid.Size * 0.5f;
+
+            halfAsteroid.View.Transform.position = position;
+            halfAsteroid.View.Transform.localScale = Vector3.one * newSize;
+
+            halfAsteroid.Size = newSize;
 
             halfAsteroid.Health.EndOfHpAction += Split;
-            halfAsteroid.Health.EndOfHpAction += halfAsteroidView.Defeat;
-            halfAsteroid.Transform = halfAsteroidView.Transform;
-            halfAsteroid.Rigidbody = halfAsteroidView.RigidBody;
-            halfAsteroidView.Interact += halfAsteroid.Interaction;
+            halfAsteroid.Health.EndOfHpAction += halfAsteroid.View.Defeat;
+            halfAsteroid.View.gameObject.SetActive(true);
 
-            
-            halfAsteroid.SetTrajectory(Random.insideUnitCircle.normalized);
+            halfAsteroid.SetTrajectory(Random.insideUnitCircle.normalized * 10);
 
-            asteroids.Add(halfAsteroid);
+            return halfAsteroid;
         }
     }
 }

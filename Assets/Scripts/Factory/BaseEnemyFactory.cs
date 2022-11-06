@@ -58,6 +58,7 @@ namespace GB_Asteroids
             view.MaxHealth = _asteroid.MaxHealth;
             view.Damage = _asteroid.Damage;
             view.Points = _asteroid.Points;
+            view.MinSize = _asteroid.MinSize;
             view.Size = UnityEngine.Random.Range(_asteroid.MinSize, _asteroid.MaxSize);
 
             return view;

@@ -35,8 +35,8 @@ namespace GB_Asteroids
         }
 
         public void Shoot() 
-        { 
-            _weapon.Fire();
+        {
+            _weapon.FireModel.Fire();
         }
 
         public void TakeDamage(float amount)

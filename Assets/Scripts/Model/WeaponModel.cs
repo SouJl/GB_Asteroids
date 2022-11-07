@@ -1,36 +1,23 @@
-﻿using GB_Asteroids.Builder;
-using UnityEngine;
-
-namespace GB_Asteroids
+﻿namespace GB_Asteroids
 {
     public class WeaponModel : IWeapon
     {
-        private float _fireForce;
         private int _fireRate;
-        private Transform _firePoint;
-        private SimpleObjectConfig _bulletConfig;
+        private FireType _fireType;
+        private IFire _fireModel;
 
         public int FireRate { get => _fireRate; set => _fireRate = value; }
-        public Transform FirePoint { get => _firePoint; set => _firePoint = value; }
-        public SimpleObjectConfig BulletConfig { get => _bulletConfig; set => _bulletConfig = value; }
-        public float FireForce { get => _fireForce; set => _fireForce = value; }
+        public FireType FireType { get => _fireType; set => _fireType = value; }
+        public IFire FireModel { get => _fireModel; set => _fireModel = value; }
+
+        private FireFactory _factory;
 
         public WeaponModel(WeaponView view) 
         {
-            FireForce = view.FireForce;
             FireRate = view.FireRate;
-            FirePoint = view.FirePoint;
-            BulletConfig = view.BulletConfig;
-
-        }
-
-        public void Fire()
-        {         
-            var bullet = ServiceLocator.Resolve<IViewBuilderService>().Instantiate<Transform>(BulletConfig, FirePoint);
-
-            BulletView view = bullet.gameObject.AddComponent<BulletView>();
-
-            view.Rigidbody.AddForce(FirePoint.up * FireForce, ForceMode.Force);
-        }   
+            FireType = view.FireType;
+            _factory = new FireFactory(view.BulletConfig, view.FirePoint, view.FireForce);
+            FireModel = _factory.GetFireModel(FireType);
+        }  
     }
 }

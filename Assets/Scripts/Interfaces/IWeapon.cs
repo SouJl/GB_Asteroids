@@ -1,14 +1,11 @@
-﻿using UnityEngine;
-
-namespace GB_Asteroids
+﻿namespace GB_Asteroids
 {
     public interface IWeapon
     {
-        float FireForce { get; set; }
         int FireRate { get; set; }
 
-        Transform FirePoint { get; set; }
+        FireType FireType { get; set; }
 
-        void Fire();
+        IFire FireModel { get; set; }
     }
 }

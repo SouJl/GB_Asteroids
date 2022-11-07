@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.045497544, g: 0.041600414, b: 0.039306205, a: 1}
+  m_IndirectSpecularColor: {r: 0.045462362, g: 0.041695178, b: 0.03926602, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -186,10 +186,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f944d0926f247c141ae66b46c888c106, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fireForce: 800
-  _fireRate: 4
+  _firePoint: {fileID: 256517210117844536, guid: f25412ec2037b884f9b7e55c4cba8ec4, type: 3}
+  _fireType: 1
   _bulletConfig: {fileID: 11400000, guid: 292180518c1a43d49bc5c5d9c3776cb3, type: 2}
-  _firePoint: {fileID: 339566878}
+  _fireRate: 4
+  _fireForce: 800
 --- !u!54 &145065761
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -376,11 +377,6 @@ PrefabInstance:
 --- !u!4 &339566877 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2618594703741472712, guid: 4f8075dfd278e2844a4f6f2004a449e3, type: 3}
-  m_PrefabInstance: {fileID: 339566876}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &339566878 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3577475914239832901, guid: 4f8075dfd278e2844a4f6f2004a449e3, type: 3}
   m_PrefabInstance: {fileID: 339566876}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &551927291

@@ -10,10 +10,13 @@ namespace GB_Asteroids
         
         [SerializeField] private EnemySpawnerView _enemySpawner;
 
+        [SerializeField] private SerializavbleViewServise serializavbleViewService;
+
         private ListExecuteController _executeUpdate;
 
         private PlayerController _playerController;
         private EnemyController _enemyController;
+
 
 
         void Start()
@@ -28,7 +31,7 @@ namespace GB_Asteroids
             _executeUpdate.AddExecuteObject(_enemyController);
 
             ServiceLocator.SetService<IViewService>(new ViewService());
-            ServiceLocator.SetService<IViewBuilderService>(new ViewBuilderService());
+            ServiceLocator.SetService(serializavbleViewService.viewBuilder);
         }
 
         void Update()

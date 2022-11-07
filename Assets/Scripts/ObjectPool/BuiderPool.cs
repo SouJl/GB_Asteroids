@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace GB_Asteroids
 {
+    [Serializable]
     public class BuiderPool :IDisposable
     {
         private readonly Stack<GameObject> _stack = new Stack<GameObject>();   

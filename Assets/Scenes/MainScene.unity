@@ -298,6 +298,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerView: {fileID: 145065759}
   _enemySpawner: {fileID: 673188835}
+  serializavbleViewService: {fileID: 2068885917}
 --- !u!1001 &339566876
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1039,6 +1040,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2068885916}
+  - component: {fileID: 2068885917}
   m_Layer: 0
   m_Name: Components
   m_TagString: Untagged
@@ -1061,3 +1063,16 @@ Transform:
   m_Father: {fileID: 285000088}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2068885917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2068885915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86cd4fd0bd01e7d4c9ca191bd6a87d24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _keys: []

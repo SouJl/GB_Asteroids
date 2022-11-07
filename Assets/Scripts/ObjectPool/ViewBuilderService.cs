@@ -6,19 +6,21 @@ namespace GB_Asteroids
 {
     public class ViewBuilderService: IViewBuilderService
     {
-        private readonly Dictionary<string, BuiderPool> _viewCashe;
+        private Dictionary<string, BuiderPool> viewCashe;
+
+        public Dictionary<string, BuiderPool> ViewCashe { get => viewCashe;  set => viewCashe = value; }
 
         public ViewBuilderService()
         {
-            _viewCashe = new Dictionary<string, BuiderPool>();
+            ViewCashe = new Dictionary<string, BuiderPool>();
         }
 
         public T Instantiate<T>(SimpleObjectConfig config)
         {
-            if (!_viewCashe.TryGetValue(config.Name, out BuiderPool viewPool))
+            if (!ViewCashe.TryGetValue(config.Name, out BuiderPool viewPool))
             {
                 viewPool = new BuiderPool(config);
-                _viewCashe[config.Name] = viewPool;
+                ViewCashe[config.Name] = viewPool;
             }
 
             if (viewPool.Pop().TryGetComponent(out T component))
@@ -31,7 +33,7 @@ namespace GB_Asteroids
 
         public void Destroy(GameObject gameObject)
         {
-            _viewCashe[gameObject.name].Push(gameObject);
+            ViewCashe[gameObject.name].Push(gameObject);
         }
     }
 }

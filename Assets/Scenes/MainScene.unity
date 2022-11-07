@@ -526,7 +526,7 @@ MonoBehaviour:
   _enemyFactory: {fileID: 11400000, guid: 4e64c44bfe228a741bb14d9817396566, type: 2}
   _asteroidsSpawner:
     _spawnDistance: 20
-    spawnRate: 6
+    spawnRate: 3
     amountPerSpawn: 1
     trajectoryVariance: 15
   _enemyShipSpawner:

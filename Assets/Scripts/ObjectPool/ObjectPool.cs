@@ -28,7 +28,7 @@ namespace GB_Asteroids
             }
             else 
             {
-                go = Object.Instantiate(_stack.Pop());
+                go = _stack.Pop();
             }
             go.SetActive(true);
             go.transform.SetParent(null);

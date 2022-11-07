@@ -43,7 +43,6 @@ namespace GB_Asteroids
             Rigidbody = View.RigidBody;
             Transform = View.Transform;
             View.Interact += Interaction;
-            Health.EndOfHpAction += View.Defeat;
         }
 
         public AbstractEnemy(EnemyConfig config, EnemyView view) 
@@ -57,7 +56,6 @@ namespace GB_Asteroids
             Health = new HealthModel(MaxHealth);
 
             View = view;
-            Health.EndOfHpAction += View.Defeat;
             Rigidbody = View.RigidBody;
             View.Interact += Interaction;
         }

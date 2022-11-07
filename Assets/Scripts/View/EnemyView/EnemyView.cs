@@ -14,6 +14,8 @@ namespace GB_Asteroids
         [SerializeField] private float _damage;
         [SerializeField] private float _points;
 
+        [SerializeField] private BoundsCheck _boundsCheck;
+
         public Rigidbody RigidBody { get => _rigidBody; set => _rigidBody = value; }
 
         public EnemyType Type { get => _type; set => _type = value; }
@@ -29,6 +31,22 @@ namespace GB_Asteroids
         {
             base.Awake();
             RigidBody = GetComponent<Rigidbody>();
+            
+        }
+
+        private void Start()
+        {
+            _boundsCheck = GetComponent<BoundsCheck>();
+        }
+
+        private void Update()
+        {
+            if (!_boundsCheck) return;
+
+            if (_boundsCheck.IsOutOfBounds())
+            {
+                OutOfBounds();
+            }
         }
 
         private void OnTriggerEnter(Collider other)
@@ -88,6 +106,12 @@ namespace GB_Asteroids
                 var newSphereCollider = newObject.AddComponent<SphereCollider>();
                 newSphereCollider.radius = sphereCollider.radius;
                 newSphereCollider.isTrigger = sphereCollider.isTrigger;
+            }
+
+            if(gameObject.TryGetComponent<BoundsCheck>(out var boundsCheck)) 
+            {
+                var newBoundsCheck = newObject.AddComponent<BoundsCheck>();
+                newBoundsCheck.KeepOnScreen = boundsCheck.KeepOnScreen;
             }
 
             newObject.transform.position = transform.position;

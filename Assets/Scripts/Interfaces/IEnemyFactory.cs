@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using GB_Asteroids.Enemy;
+using UnityEngine;
 
 namespace GB_Asteroids
 {
@@ -6,6 +7,8 @@ namespace GB_Asteroids
     {
         IEnemy Create(EnemyType type, Vector3 position, Quaternion rotation);
 
-        EnemyView CreateView(EnemyType type, Vector3 position, Quaternion rotation);
+        AsteroidModel CreateAsteroid(Vector3 position, Quaternion rotation);
+
+        EnemyShipModel CreateShip(Vector3 position, Quaternion rotation);
     }
 }

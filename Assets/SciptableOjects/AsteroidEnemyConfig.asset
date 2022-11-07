@@ -9,14 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1643412267322747ab1b6c431ced208, type: 3}
+  m_Script: {fileID: 11500000, guid: 7af81d2a0bf310f4d93ab74591e90635, type: 3}
   m_Name: AsteroidEnemyConfig
   m_EditorClassIdentifier: 
   Name: Asteroid
   Type: 1
-  MinSize: 1
-  MaxSize: 5
   MaxHealth: 10
   Damage: 20
   Points: 20
   Prefab: {fileID: 151664, guid: fa49e460baf435b4780da7196c2ab473, type: 3}
+  MinSize: 1
+  MaxSize: 5

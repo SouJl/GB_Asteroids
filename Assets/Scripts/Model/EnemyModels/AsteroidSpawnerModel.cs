@@ -78,8 +78,10 @@ namespace GB_Asteroids
 
         private void Split(bool state)
         {
-            var asteroid = asteroids.Where(a => a.Health.CurrentHealth == 0).First() as AsteroidModel;
+            var asteroid = asteroids.Where(a => a.Health.CurrentHealth == 0).FirstOrDefault() as AsteroidModel;
 
+            if (asteroid == null) return;
+            
 
             if ((asteroid.Size * 0.5f ) >= asteroid.MinSize)
             {

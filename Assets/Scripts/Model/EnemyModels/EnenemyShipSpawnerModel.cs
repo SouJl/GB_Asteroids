@@ -33,8 +33,6 @@ namespace GB_Asteroids
             enemyShips = new List<IEnemy>();
         }
 
-
-
         public void Spawn()
         {
             if (TimeBeforeSpawn < SpawnRate) return;
@@ -44,7 +42,7 @@ namespace GB_Asteroids
                 var postion = GetPosition();
                 var rotation = GetRotation();
 
-                var enemy = _factory.Create(EnemyType.EnemyShip, postion, rotation).Clone();
+                var enemy = _factory.Create(EnemyType.EnemyShip, postion, rotation);
 
                 enemyShips.Add(enemy);
             }

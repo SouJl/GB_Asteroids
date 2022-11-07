@@ -2,14 +2,13 @@
 
 namespace GB_Asteroids
 { 
-    [CreateAssetMenu(fileName = "EnemyConfig", menuName = "ScriptableObjects/EnemyScriptableObject")]
+    [CreateAssetMenu(fileName = "EnemyConfig", menuName = "ScriptableObjects/EnemyConfigs/EnemyConfig")]
     public class EnemyConfig: ScriptableObject
     {
+        [Header("Base Enemy Settings")]
+
         public string Name;
         public EnemyType Type;
-
-        public float MinSize;
-        public float MaxSize;
 
         public float MaxHealth;
         public float Damage;

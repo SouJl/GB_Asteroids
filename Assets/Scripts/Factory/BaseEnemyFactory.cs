@@ -7,7 +7,7 @@ namespace GB_Asteroids
     [CreateAssetMenu(fileName = "BaseEnemyFactory", menuName = "ScriptableObjects/BaseEnemyFactory")]
     public class BaseEnemyFactory : EnemyFactory
     {
-        [SerializeField] private EnemyConfig _asteroid;
+        [SerializeField] private AsteroidEnemyConfig _asteroid;
 
         [SerializeField] private EnemyConfig _enemyShip;
 
@@ -49,7 +49,8 @@ namespace GB_Asteroids
 
         public override EnemyShipModel CreateShip(Vector3 position, Quaternion rotation)
         {
-            throw new NotImplementedException();
+            var obj = Instantiate(_enemyShip.Prefab, position, rotation);
+            return new EnemyShipModel(_enemyShip, obj.GetComponent<EnemyView>());
         }
     }
 }

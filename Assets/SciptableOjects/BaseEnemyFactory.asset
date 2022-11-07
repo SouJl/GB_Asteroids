@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52c21fcd882a89341b24c70e4199110c, type: 3}
   m_Name: BaseEnemyFactory
   m_EditorClassIdentifier: 
-  _asteroid: {fileID: 11400000, guid: 5f817075a746c8943aa716f01512761c, type: 2}
+  _asteroid: {fileID: 11400000, guid: c8944064663acd94983c32edd08b329c, type: 2}
   _enemyShip: {fileID: 11400000, guid: cf56adae9dbe78546813e4681045df5b, type: 2}

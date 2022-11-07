@@ -26,7 +26,7 @@ namespace GB_Asteroids
 
         protected override void ChangePosotion(Vector2 input)
         {
-            _engine.AddForce(Transform.up * input.y);
+            _engine.MoveModel.Move(Transform.up * input.y);
         }
 
         protected override void ChangeRotation(Vector2 input)

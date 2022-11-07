@@ -13,11 +13,11 @@ namespace GB_Asteroids
             _viewCashe = new Dictionary<string, BuiderPool>();
         }
 
-        public T Instantiate<T>(SimpleObjectConfig config, Transform initPos = null)
+        public T Instantiate<T>(SimpleObjectConfig config)
         {
             if (!_viewCashe.TryGetValue(config.Name, out BuiderPool viewPool))
             {
-                viewPool = new BuiderPool(config, initPos);
+                viewPool = new BuiderPool(config);
                 _viewCashe[config.Name] = viewPool;
             }
 

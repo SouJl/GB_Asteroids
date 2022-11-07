@@ -12,18 +12,11 @@ namespace GB_Asteroids
 
         private readonly Transform _root;
 
-        private readonly Transform _instancePosition;
-
-        public BuiderPool(SimpleObjectConfig objectConfig, Transform initPos = null)
+        public BuiderPool(SimpleObjectConfig objectConfig)
         {
             _ojectConfig = objectConfig;
 
             _root = new GameObject($"[{_ojectConfig.Name}]").transform;
-            
-            if (initPos != null)
-            {
-                _instancePosition = initPos;
-            }
         }
 
         public GameObject Pop()
@@ -32,13 +25,10 @@ namespace GB_Asteroids
             if (_stack.Count == 0)
             {
                 go = Build(_ojectConfig);
-                go.transform.position = _instancePosition.position;
-                go.transform.rotation = Quaternion.identity;
             }
             else
             {
                 go = _stack.Pop();
-                go.transform.position = _instancePosition.position;
             }
             go.SetActive(true);
             go.transform.SetParent(null);

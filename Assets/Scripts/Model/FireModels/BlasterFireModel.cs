@@ -11,7 +11,10 @@ namespace GB_Asteroids.FireModels
 
         public override void Fire()
         {
-            var bullet = ServiceLocator.Resolve<IViewBuilderService>().Instantiate<Transform>(BulletConfig, FirePoint);
+            var bullet = ServiceLocator.Resolve<IViewBuilderService>().Instantiate<Transform>(BulletConfig);
+
+            bullet.transform.position = FirePoint.position;
+            bullet.transform.rotation = Quaternion.identity;
 
             BulletView view = bullet.gameObject.AddComponent<BulletView>();
 

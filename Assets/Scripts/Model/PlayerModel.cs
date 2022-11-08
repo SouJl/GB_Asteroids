@@ -13,6 +13,8 @@ namespace GB_Asteroids
         private IEngine _engine;
         private IRotation _rotator;
 
+        private IFire _fire;
+
         public PlayerModel(PlayerView view) 
         {
             Transform = view.transform;
@@ -21,6 +23,8 @@ namespace GB_Asteroids
             _weapon = new WeaponModel(view.Weapon);
             _engine = new EngineModel(view.Engine);
             _rotator = new RotatorModel(view.Rotator, Transform);
+
+            _fire = _weapon.FireModel;
 
         }
 
@@ -36,7 +40,7 @@ namespace GB_Asteroids
 
         public void Shoot() 
         {
-            _weapon.FireModel.Fire();
+            _fire.Fire();
         }
 
         public void TakeDamage(float amount)

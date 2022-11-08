@@ -18,8 +18,9 @@ namespace GB_Asteroids
         private Camera _camera;
         private List<IEnemy> enemyShips;
 
-        public EnenemyShipSpawnerModel(IEnemyFactory factory, EnemyShipSpawnView spawnView, Transform targetTransform)
+        public EnenemyShipSpawnerModel(CompositeEnemyFactory factory, EnemyShipSpawnView spawnView, Transform targetTransform)
         {
+            factory.AddFactory(EnemyType.EnemyShip);
             _factory = factory;
 
             SpawnRate = spawnView.SpawnRate;

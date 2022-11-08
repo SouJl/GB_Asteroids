@@ -1,15 +1,17 @@
 ﻿using GB_Asteroids.Enemy;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace GB_Asteroids
 {
-    [CreateAssetMenu(fileName = "BaseEnemyFactory", menuName = "ScriptableObjects/BaseEnemyFactory")]
+    [CreateAssetMenu(fileName = "BaseEnemyFactory", menuName = "ScriptableObjects/EnemyFactory/BaseEnemyFactory")]
     public class BaseEnemyFactory : EnemyFactory
     {
         [SerializeField] private AsteroidEnemyConfig _asteroid;
 
         [SerializeField] private EnemyConfig _enemyShip;
+
 
         public override IEnemy Create(EnemyType type, Vector3 position, Quaternion rotation)
         {
@@ -29,7 +31,7 @@ namespace GB_Asteroids
             }
         }
 
-        public override AsteroidModel CreateAsteroid(Vector3 position, Quaternion rotation)
+        public AsteroidModel CreateAsteroid(Vector3 position, Quaternion rotation)
         {
             var obj = Instantiate(_asteroid.Prefab, position, rotation);
             
@@ -47,7 +49,7 @@ namespace GB_Asteroids
             return new AsteroidModel(view);
         }
 
-        public override EnemyShipModel CreateShip(Vector3 position, Quaternion rotation)
+        public EnemyShipModel CreateShip(Vector3 position, Quaternion rotation)
         {
             var obj = Instantiate(_enemyShip.Prefab, position, rotation);
             return new EnemyShipModel(_enemyShip, obj.GetComponent<EnemyView>());

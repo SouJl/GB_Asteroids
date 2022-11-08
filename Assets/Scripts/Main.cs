@@ -1,6 +1,5 @@
-using GB_Asteroids.Builder;
+using GB_Asteroids.Facade;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace GB_Asteroids 
 {
@@ -12,42 +11,17 @@ namespace GB_Asteroids
 
         [SerializeField] private SerializavbleViewServise serializavbleViewService;
 
-        private ListExecuteController _executeUpdate;
 
-        private PlayerController _playerController;
-        private EnemyController _enemyController;
-
-
+        private GameService game = new GameService();
 
         void Start()
         {
-            _executeUpdate = new ListExecuteController();
-
-            _playerController = new PlayerController(_playerView);
-            _playerController.Player.Health.EndOfHpAction += GameOver;
-            _executeUpdate.AddExecuteObject(_playerController);
-
-            _enemyController = new EnemyController(_enemySpawner, _playerView.transform);
-            _executeUpdate.AddExecuteObject(_enemyController);
-
-            ServiceLocator.SetService<IViewService>(new ViewService());
-            ServiceLocator.SetService(serializavbleViewService.viewBuilder);
+            game.Start(_playerView, _enemySpawner, serializavbleViewService);
         }
 
         void Update()
         {
-            while (_executeUpdate.MoveNext())
-            {
-                IExecute tmp = (IExecute)_executeUpdate.Current;
-                tmp.Execute();
-            }
-            _executeUpdate.Reset();
-        }
-
-        private void GameOver(bool state)
-        {
-            if(!state)
-                SceneManager.LoadScene("MainScene");
+            game.Work();
         }
     }
 }

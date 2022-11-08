@@ -7,6 +7,8 @@ namespace GB_Asteroids
         public Transform LaserDotPosition { get; }
         public GameObject LaserDotPrefab { get; }
 
+        private GameObject _laserSight;
+
         public LaserDotModficationWepon(Transform laserDotPosition, GameObject laserDotPrefab) 
         {
             LaserDotPosition = laserDotPosition;
@@ -15,7 +17,17 @@ namespace GB_Asteroids
 
         protected override IWeapon AddModification(IWeapon weapon)
         {
-            GameObject laserDot = Object.Instantiate(LaserDotPrefab, LaserDotPosition.position, Quaternion.identity);
+            _laserSight = Object.Instantiate(LaserDotPrefab, LaserDotPosition.position, LaserDotPosition.rotation);
+
+            _laserSight.transform.SetParent(LaserDotPosition);
+
+            return weapon;
+        }
+
+        public override IWeapon RemoveModifiction(IWeapon weapon)
+        {
+            _laserSight.transform.SetParent(null);
+            Object.Destroy(_laserSight);
             return weapon;
         }
     }

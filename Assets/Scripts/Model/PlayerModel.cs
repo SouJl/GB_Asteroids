@@ -12,8 +12,9 @@ namespace GB_Asteroids
         private IWeapon _weapon;
         private IEngine _engine;
         private IRotation _rotator;
-
         private IFire _fire;
+
+        private bool _laserSightState;
 
         public PlayerModel(PlayerView view) 
         {
@@ -25,7 +26,6 @@ namespace GB_Asteroids
             _rotator = new RotatorModel(view.Rotator, Transform);
 
             _fire = _weapon.FireModel;
-
         }
 
         protected override void ChangePosotion(Vector2 input)
@@ -36,6 +36,22 @@ namespace GB_Asteroids
         protected override void ChangeRotation(Vector2 input)
         {
             _rotator.Rotate(Vector3.back * input.x);
+        }
+
+        public void OnOfLaserSight()
+        {
+            if (!_laserSightState)
+            {
+                _weapon.ModificationWeapon.ApplyModification(_weapon);
+                _fire = _weapon.ModificationWeapon;
+                _laserSightState = true;
+            }
+            else 
+            {
+                _weapon = _weapon.ModificationWeapon.RemoveModifiction(_weapon);
+                _fire = _weapon.FireModel;
+                _laserSightState = false;
+            }
         }
 
         public void Shoot() 

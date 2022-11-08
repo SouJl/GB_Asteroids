@@ -7,5 +7,7 @@
         FireType FireType { get; set; }
 
         IFire FireModel { get; set; }
+
+        ModificationWeapon ModificationWeapon { get;}
     }
 }

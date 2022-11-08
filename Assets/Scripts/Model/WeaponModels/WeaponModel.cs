@@ -22,7 +22,5 @@
 
             ModificationWeapon = new LaserDotModficationWepon(view.LaserSightPosition, view.LaserSightPrefab);
         }  
-
-
     }
 }

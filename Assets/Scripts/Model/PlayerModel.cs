@@ -1,22 +1,26 @@
+using GB_Asteroids.Proxy;
 using UnityEngine;
 
-namespace GB_Asteroids 
+namespace GB_Asteroids
 {
     public class PlayerModel : AbstractUnit
     {
-        private Transform _transform;      
+        private Transform _transform;
         public Transform Transform { get => _transform; set => _transform = value; }
-       
+
         public HealthModel Health { get; set; }
-        
-        private IWeapon _weapon;
+
         private IEngine _engine;
         private IRotation _rotator;
+
         private IFire _fire;
+        private IWeapon _weapon;
+        private WeaponProxy _weaponProxy;
+        private LockWeapon _lockWeapon = new LockWeapon();
+        private bool _reloadState = true;
+        private bool _laserSightState = false;
 
-        private bool _laserSightState;
-
-        public PlayerModel(PlayerView view) 
+        public PlayerModel(PlayerView view)
         {
             Transform = view.transform;
             Health = new HealthModel(view.Hp);
@@ -25,7 +29,12 @@ namespace GB_Asteroids
             _engine = new EngineModel(view.Engine);
             _rotator = new RotatorModel(view.Rotator, Transform);
 
-            _fire = _weapon.FireModel;
+            _weaponProxy = new WeaponProxy(_weapon, _lockWeapon);
+
+            _fire = _weaponProxy;
+
+            _reloadState = true;
+            _laserSightState = false;
         }
 
         protected override void ChangePosotion(Vector2 input)
@@ -46,15 +55,30 @@ namespace GB_Asteroids
                 _fire = _weapon.ModificationWeapon;
                 _laserSightState = true;
             }
-            else 
+            else
             {
                 _weapon = _weapon.ModificationWeapon.RemoveModifiction(_weapon);
-                _fire = _weapon.FireModel;
+                _fire = _weaponProxy;
                 _laserSightState = false;
             }
         }
 
-        public void Shoot() 
+        public void Reload()
+        {
+            if (_reloadState)
+            {
+                _lockWeapon.IsLock = true;
+                _reloadState = false;
+            }
+            else
+            {
+                _lockWeapon.IsLock = false;
+                _reloadState = true;
+            }
+
+        }
+
+        public void Shoot()
         {
             _fire.Fire();
         }

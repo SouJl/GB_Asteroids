@@ -6,7 +6,10 @@ namespace GB_Asteroids
     public class PlayerModel : AbstractUnit
     {
         private Transform _transform;
-        public Transform Transform { get => _transform; set => _transform = value; }
+        public Transform Transform { get => _transform; private set => _transform = value; }
+
+        private Rigidbody _rigidbody;
+        public Rigidbody Rigidbody { get => _rigidbody; set => _rigidbody = value; }
 
         public HealthModel Health { get; set; }
 
@@ -23,10 +26,13 @@ namespace GB_Asteroids
         public PlayerModel(PlayerView view)
         {
             Transform = view.transform;
+            
+            Rigidbody = view.Rigidbody;
+
             Health = new HealthModel(view.Hp);
 
             _weapon = new WeaponModel(view.Weapon);
-            _engine = new EngineModel(view.Engine);
+            _engine = new EngineModel(view.Engine.Type, view.Engine.Power, view.Engine.ForceMode);
             _rotator = new RotatorModel(view.Rotator, Transform);
 
             _weaponProxy = new WeaponProxy(_weapon, _lockWeapon);
@@ -39,7 +45,7 @@ namespace GB_Asteroids
 
         protected override void ChangePosotion(Vector2 input)
         {
-            _engine.MoveModel.Move(Transform.up * input.y);
+            _engine.MoveModel.Move(Rigidbody,Transform.up * input.y);
         }
 
         protected override void ChangeRotation(Vector2 input)

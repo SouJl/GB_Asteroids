@@ -8,7 +8,6 @@ namespace GB_Asteroids
 
         float Power { get; set; }
         ForceMode ForceMode { get; set; }
-        Rigidbody Rigidbody { get; set; }
 
         IMove MoveModel { get; set; }
     }

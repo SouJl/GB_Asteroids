@@ -40,7 +40,7 @@ namespace GB_Asteroids
 
         public void Execute()
         {
-            _playerModel.Move(_move.ReadValue<Vector2>());
+            _playerModel.Move(_playerModel.Rigidbody, _move.ReadValue<Vector2>());
         }
 
         private void OnEnable()

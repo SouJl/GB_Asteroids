@@ -4,6 +4,6 @@ namespace GB_Asteroids
 {
     public interface IRotation
     {
-        void Rotate(Vector3 input);
+        void Rotate(Rigidbody rigidbody, Vector3 input);
     }
 }

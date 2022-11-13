@@ -5,35 +5,28 @@ namespace GB_Asteroids
 {
     public class PlayerModel : AbstractUnit
     {
-        private Transform _transform;
-        public Transform Transform { get => _transform; private set => _transform = value; }
-
-        private Rigidbody _rigidbody;
-        public Rigidbody Rigidbody { get => _rigidbody; set => _rigidbody = value; }
-
         public HealthModel Health { get; set; }
 
         private IEngine _engine;
         private IRotation _rotator;
+        private IWeapon _weapon;
+
+        public IEngine Engine { get => _engine; set => _engine = value; }
+        public IRotation Rotator { get => _rotator; set => _rotator = value; }
+        public IWeapon Weapon { get => _weapon; set => _weapon = value; }
 
         private IFire _fire;
-        private IWeapon _weapon;
+        
         private WeaponProxy _weaponProxy;
         private LockWeapon _lockWeapon = new LockWeapon();
         private bool _reloadState = true;
         private bool _laserSightState = false;
 
         public PlayerModel(PlayerView view)
-        {
-            Transform = view.transform;
-            
-            Rigidbody = view.Rigidbody;
-
+        {         
             Health = new HealthModel(view.Hp);
 
             _weapon = new WeaponModel(view.Weapon);
-            _engine = new EngineModel(view.Engine.Type, view.Engine.Power, view.Engine.ForceMode);
-            _rotator = new RotatorModel(view.Rotator, Transform);
 
             _weaponProxy = new WeaponProxy(_weapon, _lockWeapon);
 
@@ -43,15 +36,16 @@ namespace GB_Asteroids
             _laserSightState = false;
         }
 
-        protected override void ChangePosotion(Vector2 input)
+        public override void Move(Rigidbody rigidbody, Vector3 input)
         {
-            _engine.MoveModel.Move(Rigidbody,Transform.up * input.y);
+            Engine.MoveModel.Move(rigidbody, input);
         }
 
-        protected override void ChangeRotation(Vector2 input)
+        public override void Rotate(Rigidbody rigidbody, Vector3 input)
         {
-            _rotator.Rotate(Vector3.back * input.x);
+            Rotator.Rotate(rigidbody, input);
         }
+
 
         public void OnOfLaserSight()
         {

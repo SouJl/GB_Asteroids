@@ -2,16 +2,10 @@
 
 namespace GB_Asteroids
 {
-    public abstract class AbstractUnit : IMove
+    public abstract class AbstractUnit : IMove, IRotation
     {
-        public void Move(Rigidbody rigidbody, Vector3 input) 
-        {
-            ChangePosotion(input);
-            ChangeRotation(input);
-        }
+        public abstract void Move(Rigidbody rigidbody, Vector3 input);
 
-        protected abstract void ChangePosotion(Vector2 input);
-
-        protected abstract void ChangeRotation(Vector2 input);
+        public abstract void Rotate(Rigidbody rigidbody, Vector3 input);
     }
 }

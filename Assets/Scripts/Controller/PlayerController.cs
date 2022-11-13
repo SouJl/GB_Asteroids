@@ -24,6 +24,21 @@ namespace GB_Asteroids
             _playerView = view;
             _playerModel = new PlayerModel(_playerView);
 
+            _playerModel.Engine = new EngineModel(_playerView.Engine.Type, _playerView.Engine.Power, _playerView.Engine.ForceMode);
+            _playerModel.Rotator = new RotatorModel(_playerView.Rotator.RotationSpeed);
+            
+            SetActions();
+        }
+
+        public void Execute()
+        {
+            Vector3 inputVector = _move.ReadValue<Vector2>();
+            ChangePosition(inputVector);
+            ChangeRotation(inputVector);        
+        }
+
+        private void SetActions() 
+        {
             _inputActions = new PlayerAction();
 
             _move = _inputActions.Player.Movement;
@@ -38,9 +53,15 @@ namespace GB_Asteroids
             OnEnable();
         }
 
-        public void Execute()
+
+        private void ChangePosition(Vector3 input) 
         {
-            _playerModel.Move(_playerModel.Rigidbody, _move.ReadValue<Vector2>());
+            _playerModel.Move(_playerView.Rigidbody, _playerView.transform.up * input.y);
+        }
+
+        private void ChangeRotation(Vector3 input) 
+        {
+            _playerModel.Rotate(_playerView.Rigidbody, Vector3.back * input.x);
         }
 
         private void OnEnable()

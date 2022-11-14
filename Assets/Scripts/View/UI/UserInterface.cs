@@ -18,7 +18,10 @@ namespace GB_Asteroids.UI
         private void Start()
         {
             actions = new PlayerAction();
+            
             _pause = actions.UI.Pause;
+            _pause.performed += _ => OpenPauseMenu();
+
             _pause.Enable();
 
             Execute(StateUI.UserHud);
@@ -52,14 +55,22 @@ namespace GB_Asteroids.UI
             _currentUi.Execute();
         }
 
-        private bool isActiveWindow = false;
-
-        private void Update()
+        private void OpenPauseMenu() 
         {
-            if (_pause.IsPressed() ) 
+            switch (_stateUi)
             {
-
-                Execute(StateUI.PauseMenu);
+                case StateUI.UserHud:
+                    {
+                        Execute(StateUI.PauseMenu);
+                        break;
+                    }
+                case StateUI.PauseMenu:
+                    {
+                        Execute(StateUI.UserHud);
+                    }
+                    break;
+                default:
+                    break;
             }
         }
     }

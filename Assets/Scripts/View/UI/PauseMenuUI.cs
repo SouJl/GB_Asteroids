@@ -12,7 +12,10 @@ namespace GB_Asteroids.UI
         [SerializeField] private Button _optionsButton;
         [SerializeField] private Button _quitButton;
 
-        
+        public Button ResumeButton { get => _resumeButton; }
+        public Button OptionsButton { get => _optionsButton;}
+        public Button QuitButton { get => _quitButton;}
+
         public override void Execute()
         {
             Time.timeScale = 0f;

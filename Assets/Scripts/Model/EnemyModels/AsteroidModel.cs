@@ -67,6 +67,8 @@ namespace GB_Asteroids.Enemy
                     newAsteroid.SetTrajectory(Random.insideUnitCircle.normalized * 20);
                 }
             }
+            
+            StaticMembers.Score += Points;
 
             Object.Destroy(View.gameObject);
         }

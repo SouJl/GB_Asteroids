@@ -16,7 +16,7 @@ MonoBehaviour:
   Type: 1
   MaxHealth: 10
   Damage: 20
-  Points: 20
+  Points: 100
   Prefab: {fileID: 151664, guid: fa49e460baf435b4780da7196c2ab473, type: 3}
   MinSize: 1
   MaxSize: 5

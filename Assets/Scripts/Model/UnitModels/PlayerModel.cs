@@ -6,6 +6,7 @@ namespace GB_Asteroids
     public class PlayerModel : AbstractUnit
     {
         public HealthModel Health { get; set; }
+        private UnitModifier _modifier;
 
         private IEngine _engine;
         private IRotation _rotator;
@@ -14,6 +15,7 @@ namespace GB_Asteroids
         public IEngine Engine { get => _engine; set => _engine = value; }
         public IRotation Rotator { get => _rotator; set => _rotator = value; }
         public IWeapon Weapon { get => _weapon; set => _weapon = value; }
+        public UnitModifier Modifier { get => _modifier; set => _modifier = value; }
 
         private IFire _fire;
         
@@ -25,6 +27,8 @@ namespace GB_Asteroids
         public PlayerModel(PlayerView view)
         {         
             Health = new HealthModel(view.Hp);
+
+            Modifier = new UnitModifier(this);
 
             _weapon = new WeaponModel(view.Weapon);
 

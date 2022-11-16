@@ -6,9 +6,9 @@ namespace GB_Asteroids
 {
     public class PlayerController : IExecute
     {
-        private PlayerModel _playerModel;
-     
+        private PlayerModel _playerModel;     
         private PlayerView _playerView;
+
 
         PlayerAction _inputActions;
         
@@ -16,6 +16,7 @@ namespace GB_Asteroids
         private InputAction _fire;
         private InputAction _laserSight;
         private InputAction _reload;
+        private InputAction _shift;
 
         public PlayerModel Player { get => _playerModel; }
 
@@ -26,7 +27,9 @@ namespace GB_Asteroids
 
             _playerModel.Engine = new EngineModel(_playerView.Engine.Type, _playerView.Engine.Power, _playerView.Engine.ForceMode);
             _playerModel.Rotator = new RotatorModel(_playerView.Rotator.RotationSpeed);
-            
+
+            _playerModel.Modifier.Add(new SpeedModifier(_playerModel, 5));
+
             SetActions();
         }
 
@@ -45,10 +48,12 @@ namespace GB_Asteroids
             _fire = _inputActions.Player.Fire;
             _laserSight = _inputActions.Player.LaserSight;
             _reload = _inputActions.Player.Reload;
+            _shift = _inputActions.Player.Shift;
 
             _fire.performed += _ => _playerModel.Shoot();
             _laserSight.performed += _ => _playerModel.OnOfLaserSight();
             _reload.performed += _ => _playerModel.Reload();
+            _shift.performed += _ => _playerModel.Modifier.Handle();
 
             OnEnable();
         }
@@ -56,7 +61,7 @@ namespace GB_Asteroids
 
         private void ChangePosition(Vector3 input) 
         {
-            _playerModel.Move(_playerView.Rigidbody, _playerView.transform.up * input.y);
+            _playerModel.Move(_playerView.Rigidbody, _playerView.transform.up * input.y * _playerModel.Engine.Power);
         }
 
         private void ChangeRotation(Vector3 input) 
@@ -70,6 +75,7 @@ namespace GB_Asteroids
             _fire.Enable();
             _laserSight.Enable();
             _reload.Enable();
+            _shift.Enable();
         }
 
         private void OnDisable()
@@ -78,6 +84,7 @@ namespace GB_Asteroids
             _fire.Disable();
             _laserSight.Disable();
             _reload.Disable();
+            _shift.Disable();
         }
 
         ~PlayerController() => OnDisable();

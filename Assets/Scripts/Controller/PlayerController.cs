@@ -23,10 +23,11 @@ namespace GB_Asteroids
         public PlayerController(PlayerView view)
         {
             _playerView = view;
-            _playerModel = new PlayerModel(_playerView);
-
-            _playerModel.Engine = new EngineModel(_playerView.Engine.Type, _playerView.Engine.Power, _playerView.Engine.ForceMode);
-            _playerModel.Rotator = new RotatorModel(_playerView.Rotator.RotationSpeed);
+            _playerModel = new PlayerModel(_playerView)
+            {
+                Engine = new EngineModel(_playerView.Engine.Type, _playerView.Engine.Power, _playerView.Engine.ForceMode),
+                Rotator = new RotatorModel(_playerView.Rotator.RotationSpeed)
+            };
 
             _playerModel.Modifier.Add(new SpeedModifier(_playerModel, 5));
 
@@ -36,6 +37,9 @@ namespace GB_Asteroids
         public void Execute()
         {
             Vector3 inputVector = _move.ReadValue<Vector2>();
+
+            var move = new UnitModifier(_playerModel);
+          //  move.Add(new MoveModifire(_playerView.Rigidbody)
             ChangePosition(inputVector);
             ChangeRotation(inputVector);        
         }

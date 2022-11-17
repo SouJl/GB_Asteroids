@@ -5,7 +5,7 @@ namespace GB_Asteroids
 {
     interface ISpawner
     {
-        float TimeBeforeSpawn { get; set; }
+        float Time { get; set; }
 
         void Spawn();
 

@@ -15,7 +15,7 @@ namespace GB_Asteroids
         public int AmountPerSpawn { get => _amountPerSpawn; private set => _amountPerSpawn = value; }
         public float TrajectoryVariance { get => _trajectoryVariance; private set => _trajectoryVariance = value; }
         
-        public float TimeBeforeSpawn { get; set; }
+        public float Time { get; set; }
 
         private Transform _rootTransform;
 
@@ -31,12 +31,12 @@ namespace GB_Asteroids
 
             _rootTransform = rootTransform;
 
-            TimeBeforeSpawn = SpawnRate;
+            Time = SpawnRate;
         }
 
         public void Spawn()
         {
-            if (TimeBeforeSpawn < SpawnRate) return;
+            if (Time < SpawnRate) return;
 
             for (int i = 0; i < AmountPerSpawn; i++)
             {
@@ -48,7 +48,7 @@ namespace GB_Asteroids
                 asteroid.SetTrajectory(rotation * -position);
             }
 
-            TimeBeforeSpawn = 0;
+            Time = 0;
         }
 
         public Vector3 GetPosition()

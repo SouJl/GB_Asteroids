@@ -5,10 +5,15 @@ namespace GB_Asteroids.Enemy
     public class EnemyShipModel : AbstractEnemy, IMove, IRotation
     {
         private Transform _transform;
+        
+        private float _fireRate;
 
-        public EnemyShipModel(EnemyConfig config, EnemyView view):base(config, view) 
+        public float FireRate { get => _fireRate; private set => _fireRate = value; }
+
+        public EnemyShipModel(EnemyShipConfig config, EnemyView view):base(config, view) 
         {
             _transform = view.Transform;
+            FireRate = config.FireRate;
         }
 
         public EnemyShipModel(EnemyShipModel source) : base(source) 
@@ -38,9 +43,9 @@ namespace GB_Asteroids.Enemy
             rigidbody.MoveRotation(deltaRotation);
         }
 
-        public override void DealDamage()
+        public override void DealDamage(IFire fire)
         {
-
+            fire.Fire();
         }
 
         public override void TakeDamage(float amount)

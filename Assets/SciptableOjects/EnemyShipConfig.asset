@@ -9,12 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1643412267322747ab1b6c431ced208, type: 3}
-  m_Name: ShipEnemyConfig
+  m_Script: {fileID: 11500000, guid: c0d424fe71034864faa875c394182526, type: 3}
+  m_Name: EnemyShipConfig
   m_EditorClassIdentifier: 
   Name: EnemyShip
   Type: 2
-  MaxHealth: 150
-  Damage: 50
+  MaxHealth: 50
+  Damage: 20
   Points: 100
   Prefab: {fileID: 3508030535342161897, guid: 37ef8f1b623934240bbe41525a653e7f, type: 3}
+  FireRate: 10

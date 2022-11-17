@@ -79,7 +79,7 @@ namespace GB_Asteroids
 
         public abstract IEnemy Clone();
 
-        public abstract void DealDamage();
+        public abstract void DealDamage(IFire fire);
 
         public abstract void TakeDamage(float amount);
 

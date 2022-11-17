@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using GB_Asteroids.Enemy;
+using GB_Asteroids.FireModels;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace GB_Asteroids
@@ -9,14 +11,18 @@ namespace GB_Asteroids
         private int _amountPerSpawn;
         private IEnemyFactory _factory;
 
-        public float TimeBeforeSpawn { get; set; }
+        public float Time { get; set; }
+
+        public float TimeBeforeFire { get; set; }
+
         public int AmountPerSpawn { get => _amountPerSpawn; set => _amountPerSpawn = value; }
         public float SpawnRate { get => _spawnRate; set => _spawnRate = value; }
         
         private Transform _targetTransform;
         
         private Camera _camera;
-        private List<IEnemy> enemyShips;
+        private List<AbstractEnemy> enemyShips;
+        private EnemyAbilityHandler enemyAbility;
 
         public EnenemyShipSpawnerModel(CompositeEnemyFactory factory, EnemyShipSpawnView spawnView, Transform targetTransform)
         {
@@ -29,26 +35,32 @@ namespace GB_Asteroids
             _targetTransform = targetTransform;
             _camera = Camera.main;
 
-            //TimeBeforeSpawn = SpawnRate;
+            enemyShips = new List<AbstractEnemy>();
 
-            enemyShips = new List<IEnemy>();
+            var ability = new List<IAbility>
+            {
+                new Ability("Shoot bullet", 10, DamageType.Bullet),
+                new Ability("Drop Bomb", 50, DamageType.Bomb)
+            };
+            enemyAbility = new EnemyAbilityHandler(ability);
+
         }
 
         public void Spawn()
         {
-            if (TimeBeforeSpawn < SpawnRate) return;
+            if (Time < SpawnRate) return;
 
             for (int i = 0; i < AmountPerSpawn; i++)
             {
                 var postion = GetPosition();
                 var rotation = GetRotation();
 
-                var enemy = _factory.Create(EnemyType.EnemyShip, postion, rotation);
+                var enemy = _factory.Create(EnemyType.EnemyShip, postion, rotation) as AbstractEnemy;
 
                 enemyShips.Add(enemy);
             }
 
-            TimeBeforeSpawn = 0;
+            Time = 0;
         }
 
         public Vector3 GetPosition()
@@ -70,6 +82,28 @@ namespace GB_Asteroids
             {
                 ship.SetTrajectory(_targetTransform.position);
             }
+
+           
+        }
+
+        public void UseAbility() 
+        {
+            if (enemyShips.Count == 0)
+            {
+                TimeBeforeFire = 0;
+                return;
+            }
+
+            int enemyId = Random.Range(0, enemyShips.Count);
+
+            var ship = enemyShips[enemyId] as EnemyShipModel;
+
+            if (TimeBeforeFire >= ship.FireRate) 
+            {
+                var ability = enemyAbility.GetAbility();
+                ship.DealDamage(new AbilityFireModel(null, null, 10, ability));
+                TimeBeforeFire = 0;
+            }           
         }
     }
 }

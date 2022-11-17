@@ -8,7 +8,7 @@ namespace GB_Asteroids
     {
         [SerializeField] private AsteroidEnemyConfig _asteroid;
 
-        [SerializeField] private EnemyConfig _enemyShip;
+        [SerializeField] private EnemyShipConfig _enemyShip;
 
         Dictionary<EnemyType, IEnemyFactory> _factories = new Dictionary<EnemyType, IEnemyFactory>();
 

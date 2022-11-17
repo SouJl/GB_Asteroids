@@ -33,12 +33,15 @@ namespace GB_Asteroids
         {
             foreach(var spawner in spawners)
             {
-                spawner.TimeBeforeSpawn += Time.deltaTime;
+                spawner.Time += Time.deltaTime;
                 spawner.Spawn();
                 
                 if(spawner is EnenemyShipSpawnerModel ships)
                 {
+                    ships.TimeBeforeFire += Time.deltaTime;
+
                     ships.Move();
+                    ships.UseAbility();
                 }
             }
 

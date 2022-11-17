@@ -12,7 +12,7 @@ namespace GB_Asteroids
 
         void SetTrajectory(Vector3 direction);
 
-        void DealDamage();
+        void DealDamage(IFire fire);
 
         void TakeDamage(float amout);
 

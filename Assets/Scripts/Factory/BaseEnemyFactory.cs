@@ -10,7 +10,7 @@ namespace GB_Asteroids
     {
         [SerializeField] private AsteroidEnemyConfig _asteroid;
 
-        [SerializeField] private EnemyConfig _enemyShip;
+        [SerializeField] private EnemyShipConfig _enemyShip;
 
 
         public override IEnemy Create(EnemyType type, Vector3 position, Quaternion rotation)

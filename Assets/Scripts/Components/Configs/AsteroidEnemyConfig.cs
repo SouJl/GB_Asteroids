@@ -3,7 +3,7 @@
 namespace GB_Asteroids
 {
     [CreateAssetMenu(fileName = "AsteroidEnemyConfig", menuName = "ScriptableObjects/EnemyConfigs/AsteroidEnemyConfig")]
-    public class AsteroidEnemyConfig:EnemyConfig
+    public class AsteroidEnemyConfig: EnemyConfig
     {
         [Header("Asteroid Settings")]
 

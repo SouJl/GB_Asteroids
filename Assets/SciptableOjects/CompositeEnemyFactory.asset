@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: CompositeEnemyFactory
   m_EditorClassIdentifier: 
   _asteroid: {fileID: 11400000, guid: c8944064663acd94983c32edd08b329c, type: 2}
-  _enemyShip: {fileID: 11400000, guid: cf56adae9dbe78546813e4681045df5b, type: 2}
+  _enemyShip: {fileID: 11400000, guid: 33cb8fa1623abf84fa5ea18f4dfd730d, type: 2}

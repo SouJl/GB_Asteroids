@@ -5,9 +5,9 @@ namespace GB_Asteroids
 {
     public class EnemyShipFactory:IEnemyFactory
     {
-        private EnemyConfig _enemyShip;
+        private EnemyShipConfig _enemyShip;
 
-        public EnemyShipFactory(EnemyConfig enemyConfig) 
+        public EnemyShipFactory(EnemyShipConfig enemyConfig) 
         {
             _enemyShip = enemyConfig;
         }

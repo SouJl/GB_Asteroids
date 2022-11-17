@@ -36,7 +36,7 @@ namespace GB_Asteroids.Enemy
             Rigidbody.AddForce(direction * 10);
         }
 
-        public override void DealDamage()
+        public override void DealDamage(IFire fire)
         {
             
         }

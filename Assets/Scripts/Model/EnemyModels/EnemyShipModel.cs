@@ -2,13 +2,13 @@
 
 namespace GB_Asteroids.Enemy
 {
-    public class EnemyShipModel : AbstractEnemy
+    public class EnemyShipModel : AbstractEnemy, IMove, IRotation
     {
         private Transform _transform;
 
         public EnemyShipModel(EnemyConfig config, EnemyView view):base(config, view) 
         {
-            _transform = View.Transform;
+            _transform = view.Transform;
         }
 
         public EnemyShipModel(EnemyShipModel source) : base(source) 
@@ -18,8 +18,24 @@ namespace GB_Asteroids.Enemy
 
         public override void SetTrajectory(Vector3 direction)
         {
-            Vector3 target = (direction - _transform.position).normalized;
-            Rigidbody.MovePosition(_transform.position + target * 15 * Time.deltaTime);
+            Vector3 targetDirection = direction - _transform.position;
+
+            Move(Rigidbody, targetDirection);
+            Rotate(Rigidbody, targetDirection);
+        }
+
+        public void Move(Rigidbody rigidbody, Vector3 input)
+        {
+            input.Normalize();
+            rigidbody.MovePosition(rigidbody.position + input * 5 * Time.deltaTime);
+        }
+
+        public void Rotate(Rigidbody rigidbody, Vector3 input)
+        {
+            float angle = Mathf.Atan2(input.y, input.x) * Mathf.Rad2Deg;
+            Vector3 eulerAngleVelocity = new Vector3(0, 0, angle + 90);
+            Quaternion deltaRotation = Quaternion.Euler(eulerAngleVelocity);
+            rigidbody.MoveRotation(deltaRotation);
         }
 
         public override void DealDamage()
@@ -37,6 +53,8 @@ namespace GB_Asteroids.Enemy
             base.Interaction(collider);
         }
         
-        public override IEnemy Clone() => new EnemyShipModel(this); 
+        public override IEnemy Clone() => new EnemyShipModel(this);
+
+      
     }
 }

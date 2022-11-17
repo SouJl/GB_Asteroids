@@ -947,7 +947,7 @@ MonoBehaviour:
     amountPerSpawn: 1
     trajectoryVariance: 15
   _enemyShipSpawner:
-    spawnRate: 100
+    spawnRate: 5
     amountPerSpawn: 1
 --- !u!1 &705507993
 GameObject:

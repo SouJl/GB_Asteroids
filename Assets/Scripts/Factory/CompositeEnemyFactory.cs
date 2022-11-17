@@ -23,7 +23,7 @@ namespace GB_Asteroids
                     }
                 case EnemyType.EnemyShip:
                     {
-                        _factories.Add(type, new EnemyShipFactory(_asteroid));
+                        _factories.Add(type, new EnemyShipFactory(_enemyShip));
                         break;
                     }
             }          

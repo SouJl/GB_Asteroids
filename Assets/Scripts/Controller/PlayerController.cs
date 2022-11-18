@@ -30,6 +30,7 @@ namespace GB_Asteroids
             };
 
             _playerModel.Modifier.Add(new SpeedModifier(_playerModel, 5));
+            _playerModel.Modifier.Add(new HealthModifier(_playerModel, 10));
 
             SetActions();
         }
@@ -38,8 +39,6 @@ namespace GB_Asteroids
         {
             Vector3 inputVector = _move.ReadValue<Vector2>();
 
-            var move = new UnitModifier(_playerModel);
-          //  move.Add(new MoveModifire(_playerView.Rigidbody)
             ChangePosition(inputVector);
             ChangeRotation(inputVector);        
         }
@@ -57,7 +56,7 @@ namespace GB_Asteroids
             _fire.performed += _ => _playerModel.Shoot();
             _laserSight.performed += _ => _playerModel.OnOfLaserSight();
             _reload.performed += _ => _playerModel.Reload();
-            _shift.performed += _ => _playerModel.Modifier.Handle();
+            _shift.performed += _ => AddModifire();
 
             OnEnable();
         }
@@ -71,6 +70,13 @@ namespace GB_Asteroids
         private void ChangeRotation(Vector3 input) 
         {
             _playerModel.Rotate(_playerView.Rigidbody, Vector3.back * input.x);
+        }
+
+        private void AddModifire() 
+        {
+            ModifireType modifire = (ModifireType)UnityEngine.Random.Range(0, 4);
+            Debug.Log($"add {modifire} modifire");
+            _playerModel.Modifier.Handle(modifire);
         }
 
         private void OnEnable()

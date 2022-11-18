@@ -1,18 +1,30 @@
-﻿namespace GB_Asteroids
+﻿using UnityEngine;
+
+namespace GB_Asteroids
 {
     public class SpeedModifier : UnitModifier
     {
-        private float _speed;
+        private float _maxSpeed;
 
-        public SpeedModifier(PlayerModel player, float speed) : base(player)
+        protected override ModifireType Type => ModifireType.Speed;
+
+        public SpeedModifier(PlayerModel player, float maxSpeed) : base(player)
         {
-            _speed = speed;
+            _maxSpeed = maxSpeed;
         }
 
-        public override void Handle()
+        public override void Handle(ModifireType type)
         {
-            player.Engine.Power += _speed;
-            base.Handle();
+            if(type == Type) 
+            {
+                if(player.Engine.Power < _maxSpeed) 
+                {
+                    player.Engine.Power ++;
+                }
+                Debug.Log($"Player increase speed by one. Current speed: {player.Engine.Power}");
+            }
+            else
+                base.Handle(type);
         }
     }
 }

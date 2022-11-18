@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.045462362, g: 0.041695178, b: 0.03926602, a: 1}
+  m_IndirectSpecularColor: {r: 0.045497544, g: 0.041600414, b: 0.039306205, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -947,7 +947,7 @@ MonoBehaviour:
     amountPerSpawn: 1
     trajectoryVariance: 15
   _enemyShipSpawner:
-    spawnRate: 5
+    spawnRate: 50
     amountPerSpawn: 1
 --- !u!1 &705507993
 GameObject:

@@ -6,6 +6,8 @@ namespace GB_Asteroids
         protected PlayerModel player;
         protected UnitModifier Next;
 
+        protected virtual ModifireType Type { get; }
+
         public UnitModifier(PlayerModel player) 
         {
             this.player = player;
@@ -23,6 +25,6 @@ namespace GB_Asteroids
             }
         }
 
-        public virtual void Handle() => Next?.Handle();
+        public virtual void Handle(ModifireType type) => Next?.Handle(type);
     }
 }

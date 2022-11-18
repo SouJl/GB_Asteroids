@@ -9,19 +9,25 @@ namespace GB_Asteroids
         
         [SerializeField] private EnemySpawnerView _enemySpawner;
 
-        [SerializeField] private SerializavbleViewServise serializavbleViewService;
+        [SerializeField] private SerializavbleViewServise _serializavbleViewService;
 
+        [SerializeField] private RecodView _recodView;
 
         private GameService game = new GameService();
 
         void Start()
         {
-            game.Start(_playerView, _enemySpawner, serializavbleViewService);
+            game.Start(_playerView, _enemySpawner, _serializavbleViewService, _recodView);
         }
 
         void Update()
         {
-            game.Work();
+            game.WorkUpdate();
+        }
+
+        private void FixedUpdate()
+        {
+            game.WorkFixed();
         }
     }
 }

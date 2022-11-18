@@ -47,5 +47,10 @@ namespace GB_Asteroids
 
 
         }
+
+        public void FixedExecute()
+        {
+           
+        }
     }
 }

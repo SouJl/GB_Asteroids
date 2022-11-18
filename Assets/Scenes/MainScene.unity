@@ -648,7 +648,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerView: {fileID: 145065759}
   _enemySpawner: {fileID: 673188835}
-  serializavbleViewService: {fileID: 2068885917}
+  _serializavbleViewService: {fileID: 2068885917}
+  _recodView: {fileID: 2068885918}
 --- !u!114 &285000090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2468,6 +2469,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2068885916}
   - component: {fileID: 2068885917}
+  - component: {fileID: 2068885918}
   m_Layer: 0
   m_Name: Components
   m_TagString: Untagged
@@ -2504,3 +2506,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _keys: []
   _values: []
+--- !u!114 &2068885918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2068885915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7151ce0973649124eaffa481c2bf322f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _recordTime: 5
+  _targetTransform: {fileID: 145065758}
+  _targetRigidBody: {fileID: 145065761}

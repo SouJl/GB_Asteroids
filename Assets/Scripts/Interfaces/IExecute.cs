@@ -3,5 +3,7 @@
     public interface IExecute
     {
         void Execute();
+
+        void FixedExecute();
     }
 }

@@ -49,6 +49,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Record",
+                    "type": "Button",
+                    "id": "1fff34a7-b666-4ac8-aef1-dd07d34f3115",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -148,6 +157,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Modifire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2055494a-9b0d-4b72-81a6-ed11b48c19ac",
+                    "path": "<Keyboard>/t",
+                    "interactions": "Press(pressPoint=0.3,behavior=2)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Record",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

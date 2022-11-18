@@ -71,6 +71,15 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Record"",
+                    ""type"": ""Button"",
+                    ""id"": ""1fff34a7-b666-4ac8-aef1-dd07d34f3115"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -172,6 +181,17 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
                     ""action"": ""Modifire"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2055494a-9b0d-4b72-81a6-ed11b48c19ac"",
+                    ""path"": ""<Keyboard>/t"",
+                    ""interactions"": ""Press(pressPoint=0.3,behavior=2)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Record"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -213,6 +233,7 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
         m_Player_LaserSight = m_Player.FindAction("LaserSight", throwIfNotFound: true);
         m_Player_Reload = m_Player.FindAction("Reload", throwIfNotFound: true);
         m_Player_Modifire = m_Player.FindAction("Modifire", throwIfNotFound: true);
+        m_Player_Record = m_Player.FindAction("Record", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Pause = m_UI.FindAction("Pause", throwIfNotFound: true);
@@ -280,6 +301,7 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_LaserSight;
     private readonly InputAction m_Player_Reload;
     private readonly InputAction m_Player_Modifire;
+    private readonly InputAction m_Player_Record;
     public struct PlayerActions
     {
         private @PlayerAction m_Wrapper;
@@ -289,6 +311,7 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
         public InputAction @LaserSight => m_Wrapper.m_Player_LaserSight;
         public InputAction @Reload => m_Wrapper.m_Player_Reload;
         public InputAction @Modifire => m_Wrapper.m_Player_Modifire;
+        public InputAction @Record => m_Wrapper.m_Player_Record;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -313,6 +336,9 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
                 @Modifire.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnModifire;
                 @Modifire.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnModifire;
                 @Modifire.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnModifire;
+                @Record.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRecord;
+                @Record.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRecord;
+                @Record.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRecord;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -332,6 +358,9 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
                 @Modifire.started += instance.OnModifire;
                 @Modifire.performed += instance.OnModifire;
                 @Modifire.canceled += instance.OnModifire;
+                @Record.started += instance.OnRecord;
+                @Record.performed += instance.OnRecord;
+                @Record.canceled += instance.OnRecord;
             }
         }
     }
@@ -376,6 +405,7 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
         void OnLaserSight(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
         void OnModifire(InputAction.CallbackContext context);
+        void OnRecord(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

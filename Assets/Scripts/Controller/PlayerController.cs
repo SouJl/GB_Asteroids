@@ -44,6 +44,11 @@ namespace GB_Asteroids
             ChangeRotation(inputVector);        
         }
 
+        public void FixedExecute()
+        {
+
+        }
+
         private void SetActions() 
         {
             _inputActions = new PlayerAction();
@@ -97,6 +102,7 @@ namespace GB_Asteroids
             _reload.Disable();
             _modifire.Disable();
         }
+
 
         ~PlayerController() => OnDisable();
     }

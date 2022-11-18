@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.045497544, g: 0.041600414, b: 0.039306205, a: 1}
+  m_IndirectSpecularColor: {r: 0.045462362, g: 0.041695178, b: 0.03926602, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -266,6 +266,7 @@ MonoBehaviour:
   _fireType: 1
   _bulletConfig: {fileID: 11400000, guid: 292180518c1a43d49bc5c5d9c3776cb3, type: 2}
   _fireRate: 4
+  _damage: 10
   _fireForce: 1200
   _laserSightPosition: {fileID: 1564228178}
   _laserSightPrefab: {fileID: 1017944796401607174, guid: b1288ea5bd1b1ae41b6640d1f75bf9cc, type: 3}
@@ -947,7 +948,7 @@ MonoBehaviour:
     amountPerSpawn: 1
     trajectoryVariance: 15
   _enemyShipSpawner:
-    spawnRate: 50
+    spawnRate: 10
     amountPerSpawn: 1
 --- !u!1 &705507993
 GameObject:

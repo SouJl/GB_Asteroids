@@ -14,6 +14,8 @@ namespace GB_Asteroids.Enemy
         {
             _transform = view.Transform;
             FireRate = config.FireRate;
+            View.Interact += Interaction;
+            Health.EndOfHpAction += View.Defeat;
         }
 
         public EnemyShipModel(EnemyShipModel source) : base(source) 

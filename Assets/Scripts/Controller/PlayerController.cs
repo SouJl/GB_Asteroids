@@ -16,7 +16,7 @@ namespace GB_Asteroids
         private InputAction _fire;
         private InputAction _laserSight;
         private InputAction _reload;
-        private InputAction _shift;
+        private InputAction _modifire;
 
         public PlayerModel Player { get => _playerModel; }
 
@@ -30,6 +30,7 @@ namespace GB_Asteroids
             };
 
             _playerModel.Modifier.Add(new SpeedModifier(_playerModel, 5));
+            _playerModel.Modifier.Add(new AtackModifire(_playerModel, 5, 50));
             _playerModel.Modifier.Add(new HealthModifier(_playerModel, 10));
 
             SetActions();
@@ -51,12 +52,12 @@ namespace GB_Asteroids
             _fire = _inputActions.Player.Fire;
             _laserSight = _inputActions.Player.LaserSight;
             _reload = _inputActions.Player.Reload;
-            _shift = _inputActions.Player.Shift;
+            _modifire = _inputActions.Player.Modifire;
 
             _fire.performed += _ => _playerModel.Shoot();
             _laserSight.performed += _ => _playerModel.OnOfLaserSight();
             _reload.performed += _ => _playerModel.Reload();
-            _shift.performed += _ => AddModifire();
+            _modifire.performed += _ => AddModifire();
 
             OnEnable();
         }
@@ -85,7 +86,7 @@ namespace GB_Asteroids
             _fire.Enable();
             _laserSight.Enable();
             _reload.Enable();
-            _shift.Enable();
+            _modifire.Enable();
         }
 
         private void OnDisable()
@@ -94,7 +95,7 @@ namespace GB_Asteroids
             _fire.Disable();
             _laserSight.Disable();
             _reload.Disable();
-            _shift.Disable();
+            _modifire.Disable();
         }
 
         ~PlayerController() => OnDisable();

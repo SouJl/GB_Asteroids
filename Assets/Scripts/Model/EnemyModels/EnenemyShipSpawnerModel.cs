@@ -1,6 +1,7 @@
 ﻿using GB_Asteroids.Enemy;
 using GB_Asteroids.FireModels;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace GB_Asteroids
@@ -56,7 +57,9 @@ namespace GB_Asteroids
                 var rotation = GetRotation();
 
                 var enemy = _factory.Create(EnemyType.EnemyShip, postion, rotation) as AbstractEnemy;
-
+                
+                enemy.Health.EndOfHpAction += RemoveFromList;
+                
                 enemyShips.Add(enemy);
             }
 
@@ -66,7 +69,7 @@ namespace GB_Asteroids
         public Vector3 GetPosition()
         {
             var camHeight = _camera.orthographicSize;
-            var vamWidth = camHeight * _camera.aspect;
+            var camWidth = camHeight * _camera.aspect;
 
             return new Vector3(0, camHeight - 3, 0);
         }
@@ -81,9 +84,7 @@ namespace GB_Asteroids
             foreach(var ship in enemyShips)
             {
                 ship.SetTrajectory(_targetTransform.position);
-            }
-
-           
+            }     
         }
 
         public void UseAbility() 
@@ -104,6 +105,15 @@ namespace GB_Asteroids
                 ship.DealDamage(new AbilityFireModel(null, null, 10, ability));
                 TimeBeforeFire = 0;
             }           
+        }
+
+        private void RemoveFromList(bool state) 
+        {
+            var removedEnemy = enemyShips.Where(e => e.Health.CurrentHealth == 0).ToList();
+            foreach(var enemy in removedEnemy) 
+            {
+                enemyShips.Remove(enemy);
+            }
         }
     }
 }

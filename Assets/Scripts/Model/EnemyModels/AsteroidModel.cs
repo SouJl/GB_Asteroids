@@ -44,7 +44,6 @@ namespace GB_Asteroids.Enemy
         public override void TakeDamage(float amount)
         {
             Health.ChangeCurrentHp(Health.CurrentHealth - amount);
-            Debug.Log($"{Name} Hp = {Health.CurrentHealth}");
         }
 
         public override void Interaction(Collider collider)

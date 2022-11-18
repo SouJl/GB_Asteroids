@@ -42,7 +42,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Shift",
+                    "name": "Modifire",
                     "type": "Button",
                     "id": "e617fe89-6160-4c17-9bad-b9786e5c663b",
                     "expectedControlType": "Button",
@@ -143,11 +143,11 @@
                 {
                     "name": "",
                     "id": "7c15741b-24c8-44ab-bdb7-7dd15c54a3c4",
-                    "path": "<Keyboard>/shift",
+                    "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Shift",
+                    "action": "Modifire",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

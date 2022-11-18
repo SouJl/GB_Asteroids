@@ -10,6 +10,7 @@ namespace GB_Asteroids
 
         [SerializeField] private SimpleObjectConfig _bulletConfig;
         [SerializeField] private int _fireRate;
+        [SerializeField] private int _damage;
         [SerializeField] private float _fireForce;
 
         [Header("LaserSight Settings")]
@@ -21,9 +22,11 @@ namespace GB_Asteroids
 
         public SimpleObjectConfig BulletConfig { get => _bulletConfig;  set => _bulletConfig = value; }
         public int FireRate { get => _fireRate;  set => _fireRate = value; }
+        public int Damage { get => _damage; set => _damage = value; }
         public float FireForce { get => _fireForce;  set => _fireForce = value; }
         public Transform LaserSightPosition { get => _laserSightPosition; set => _laserSightPosition = value; }
         public GameObject LaserSightPrefab { get => _laserSightPrefab; set => _laserSightPrefab = value; }
+ 
     }
 }
 

@@ -15,6 +15,7 @@ namespace GB_Asteroids
         public IEnemy Create(EnemyType type, Vector3 position, Quaternion rotation)
         {
             var obj = Object.Instantiate(_enemyShip.Prefab, position, rotation);
+            
             return new EnemyShipModel(_enemyShip, obj.GetComponent<EnemyView>());
         }
 

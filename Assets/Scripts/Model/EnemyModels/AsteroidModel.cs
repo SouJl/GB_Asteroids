@@ -1,4 +1,4 @@
-﻿using System;
+﻿using GB_Asteroids.MessageBroker;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
@@ -18,17 +18,21 @@ namespace GB_Asteroids.Enemy
             Size = view.Size;
             _minSize = view.MinSize;
             Health.EndOfHpAction += Split;
+
+            MessageBrokerHandler.Instance.Subscribe(this, OnDefatMessage);
         }
 
         public AsteroidModel(EnemyConfig config, EnemyView view):base(config, view) 
         {
-            Health.EndOfHpAction += Split;
+            Health.EndOfHpAction += Split;            
         }
 
         public AsteroidModel(AsteroidModel source) : base(source) 
         {
             _minSize = source.MinSize;
             Health.EndOfHpAction += Split;
+
+            MessageBrokerHandler.Instance.Subscribe(this, OnDefatMessage);
         }
         
         public override void SetTrajectory(Vector3 direction)
@@ -70,6 +74,9 @@ namespace GB_Asteroids.Enemy
             StaticMembers.Score += Points;
 
             Object.Destroy(View.gameObject);
+
+            MessageBrokerHandler.Instance.Publish(this);
+            MessageBrokerHandler.Instance.Unsubscribe(this, OnDefatMessage);
         }
 
         private IEnemy CreateSplit(AsteroidModel model) 
@@ -88,5 +95,7 @@ namespace GB_Asteroids.Enemy
 
             return halfAsteroid;
         }
+
+        private void OnDefatMessage() => Debug.Log($"{Name} Defeat");
     }
 }

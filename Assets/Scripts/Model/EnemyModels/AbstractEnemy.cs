@@ -31,7 +31,7 @@ namespace GB_Asteroids
 
         public AbstractEnemy(EnemyView view)
         {
-            //Name = view.name;
+            Name = view.name;
             Type = view.Type;
             Damage = view.Damage;
             Points = view.Points;

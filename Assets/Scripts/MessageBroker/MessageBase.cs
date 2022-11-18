@@ -1,24 +1,15 @@
-﻿using UnityEngine;
+﻿using System;
 
 namespace GB_Asteroids.MessageBroker
 {
-    public class MessageBase
+    public class MessageBase<T>
     {
-        public MonoBehaviour sender { get; private set; } 
-        public int id { get; private set; } 
-        public object data { get; private set; } 
-
-        public MessageBase(MonoBehaviour sender, int id, object data)
+        public object Sender { get; private set; }
+        public T Data { get; private set; }
+        public DateTime When { get; private set; }
+        public MessageBase(T data, object source)
         {
-            this.sender = sender;
-            this.id = id;
-            this.data = data;
-
-        }
-
-        public static MessageBase Create(MonoBehaviour sender,int id, object data)
-        {
-            return new MessageBase(sender, id, data);
+            Sender = source; Data = data; When = DateTime.UtcNow;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GB_Asteroids.UI;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,11 +13,13 @@ namespace GB_Asteroids
         
         private List<ISpawner> spawners;
 
+        private EnemyDestroyedLogView _logView;
 
-        public EnemyController(EnemySpawnerView spawnerView, Transform target) 
+        public EnemyController(EnemySpawnerView spawnerView, Transform target, EnemyDestroyedLogView logView) 
         {
             _enemySpawner = spawnerView;
             _target = target;
+            _logView = logView;
 
             InitSpawners();
         }
@@ -26,7 +29,7 @@ namespace GB_Asteroids
             spawners = new List<ISpawner>();
 
             spawners.Add(new AsteroidSpawnerModel(_enemySpawner.EnemyFactory as CompositeEnemyFactory, _enemySpawner.AsteroidsSpawner, _enemySpawner.Transform));
-            spawners.Add(new EnenemyShipSpawnerModel(_enemySpawner.EnemyFactory as CompositeEnemyFactory, _enemySpawner.EnemyShipSpawner, _target));
+            spawners.Add(new EnenemyShipSpawnerModel(_enemySpawner.EnemyFactory as CompositeEnemyFactory, _enemySpawner.EnemyShipSpawner, _target, _logView));
         }
 
         public void Execute()

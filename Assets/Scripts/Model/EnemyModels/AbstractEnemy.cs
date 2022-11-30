@@ -36,10 +36,10 @@ namespace GB_Asteroids
             Damage = view.Damage;
             Points = view.Points;
             MaxHealth = view.MaxHealth;
-
-            Health = new HealthModel(MaxHealth);
-
             View = view;
+            
+            Health = new HealthModel(MaxHealth, View.name);
+
             Rigidbody = View.RigidBody;
             Transform = View.Transform;
             View.Interact += Interaction;
@@ -52,10 +52,9 @@ namespace GB_Asteroids
             Damage = config.Damage;
             Points = config.Points;
             MaxHealth = config.MaxHealth;
-
-            Health = new HealthModel(MaxHealth);
-
             View = view;
+
+            Health = new HealthModel(MaxHealth, View.name);
             Rigidbody = View.RigidBody;
             View.Interact += Interaction;
         }
@@ -74,7 +73,7 @@ namespace GB_Asteroids
             Points = source.Points;
             MaxHealth = source.MaxHealth;
 
-            Health = new HealthModel(MaxHealth);
+            Health = new HealthModel(MaxHealth, View.name);
         }
 
         public abstract IEnemy Clone();

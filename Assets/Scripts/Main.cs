@@ -1,4 +1,5 @@
 using GB_Asteroids.Facade;
+using GB_Asteroids.UI;
 using UnityEngine;
 
 namespace GB_Asteroids 
@@ -13,11 +14,13 @@ namespace GB_Asteroids
 
         [SerializeField] private RecodView _recodView;
 
+        [SerializeField] private EnemyDestroyedLogView _logView;
+
         private GameService game = new GameService();
 
         void Start()
         {
-            game.Start(_playerView, _enemySpawner, _serializavbleViewService, _recodView);
+            game.Start(_playerView, _enemySpawner, _logView, _serializavbleViewService, _recodView);
         }
 
         void Update()

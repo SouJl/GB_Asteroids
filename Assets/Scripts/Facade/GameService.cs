@@ -1,14 +1,16 @@
 ﻿
+using GB_Asteroids.UI;
+
 namespace GB_Asteroids.Facade
 {
     public class GameService 
     {
         private ListExecuteController _executeUpdate = new ListExecuteController();
 
-        public void Start(PlayerView playerView, EnemySpawnerView enemySpawners, SerializavbleViewServise viewServise, RecodView recodView) 
+        public void Start(PlayerView playerView, EnemySpawnerView enemySpawners, EnemyDestroyedLogView logView , SerializavbleViewServise viewServise, RecodView recodView) 
         {
             var player = new Player(playerView);
-            var enemies = new Enemies(enemySpawners, playerView);
+            var enemies = new Enemies(enemySpawners, playerView, logView);
             var memento = new Memento(recodView);
 
             _executeUpdate.AddExecuteObject(player.GetController());

@@ -1,5 +1,6 @@
 ﻿using GB_Asteroids.Enemy;
 using GB_Asteroids.FireModels;
+using GB_Asteroids.UI;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -24,8 +25,9 @@ namespace GB_Asteroids
         private Camera _camera;
         private List<AbstractEnemy> enemyShips;
         private EnemyAbilityHandler enemyAbility;
+        private EnemyDestroyedLogView _logView;
 
-        public EnenemyShipSpawnerModel(CompositeEnemyFactory factory, EnemyShipSpawnView spawnView, Transform targetTransform)
+        public EnenemyShipSpawnerModel(CompositeEnemyFactory factory, EnemyShipSpawnView spawnView, Transform targetTransform, EnemyDestroyedLogView logView)
         {
             factory.AddFactory(EnemyType.EnemyShip);
             _factory = factory;
@@ -44,7 +46,8 @@ namespace GB_Asteroids
                 new Ability("Drop Bomb", 50, DamageType.Bomb)
             };
             enemyAbility = new EnemyAbilityHandler(ability);
-
+            
+            _logView = logView;
         }
 
         public void Spawn()
@@ -59,7 +62,9 @@ namespace GB_Asteroids
                 var enemy = _factory.Create(EnemyType.EnemyShip, postion, rotation) as AbstractEnemy;
                 
                 enemy.Health.EndOfHpAction += RemoveFromList;
-                
+
+                enemy.Health.OnEndHealth += _logView.DestroyTextChange;
+
                 enemyShips.Add(enemy);
             }
 

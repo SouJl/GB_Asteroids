@@ -1,4 +1,5 @@
 ﻿using GB_Asteroids.MessageBroker;
+using GB_Asteroids.Visitor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
@@ -20,11 +21,13 @@ namespace GB_Asteroids.Enemy
             Health.EndOfHpAction += Split;
 
             MessageBrokerHandler.Instance.Subscribe(this, OnDefatMessage);
+            OnAwake(new ConsoleLoger());
         }
 
         public AsteroidModel(EnemyConfig config, EnemyView view):base(config, view) 
         {
-            Health.EndOfHpAction += Split;            
+            Health.EndOfHpAction += Split;
+            OnAwake(new ConsoleLoger());
         }
 
         public AsteroidModel(AsteroidModel source) : base(source) 
@@ -33,6 +36,7 @@ namespace GB_Asteroids.Enemy
             Health.EndOfHpAction += Split;
 
             MessageBrokerHandler.Instance.Subscribe(this, OnDefatMessage);
+            OnAwake(new ConsoleLoger());
         }
         
         public override void SetTrajectory(Vector3 direction)
@@ -97,5 +101,10 @@ namespace GB_Asteroids.Enemy
         }
 
         private void OnDefatMessage() => Debug.Log($"{Name} Defeat");
+
+        public override void OnAwake(IGameLog logger)
+        {
+            logger.Log(this, "Создан астероид", LoggerType.Info);
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GB_Asteroids.Visitor;
+using System;
 using UnityEngine;
 
 namespace GB_Asteroids
@@ -75,6 +76,8 @@ namespace GB_Asteroids
 
             Health = new HealthModel(MaxHealth, View.name);
         }
+
+        public abstract void OnAwake(IGameLog logger);
 
         public abstract IEnemy Clone();
 

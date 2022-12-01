@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using GB_Asteroids.Visitor;
+using UnityEngine;
 
 namespace GB_Asteroids.Enemy
 {
@@ -16,11 +17,13 @@ namespace GB_Asteroids.Enemy
             FireRate = config.FireRate;
             View.Interact += Interaction;
             Health.EndOfHpAction += View.Defeat;
+            OnAwake(new ConsoleLoger());
         }
 
         public EnemyShipModel(EnemyShipModel source) : base(source) 
         {
             _transform = View.Transform;
+            OnAwake(new ConsoleLoger());
         }
 
         public override void SetTrajectory(Vector3 direction)
@@ -62,6 +65,9 @@ namespace GB_Asteroids.Enemy
         
         public override IEnemy Clone() => new EnemyShipModel(this);
 
-      
+        public override void OnAwake(IGameLog logger)
+        {
+            logger.Log(this, "Создан вражеский корабль", LoggerType.Info);
+        }
     }
 }

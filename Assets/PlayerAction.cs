@@ -80,6 +80,15 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""KeyEngine"",
+                    ""type"": ""Button"",
+                    ""id"": ""f7a10454-335b-4b92-baca-11016ce2b320"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -192,6 +201,17 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
                     ""action"": ""Record"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3117b307-5729-4838-837b-8bc150e3ed65"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""KeyEngine"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -234,6 +254,7 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
         m_Player_Reload = m_Player.FindAction("Reload", throwIfNotFound: true);
         m_Player_Modifire = m_Player.FindAction("Modifire", throwIfNotFound: true);
         m_Player_Record = m_Player.FindAction("Record", throwIfNotFound: true);
+        m_Player_KeyEngine = m_Player.FindAction("KeyEngine", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Pause = m_UI.FindAction("Pause", throwIfNotFound: true);
@@ -302,6 +323,7 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Reload;
     private readonly InputAction m_Player_Modifire;
     private readonly InputAction m_Player_Record;
+    private readonly InputAction m_Player_KeyEngine;
     public struct PlayerActions
     {
         private @PlayerAction m_Wrapper;
@@ -312,6 +334,7 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
         public InputAction @Reload => m_Wrapper.m_Player_Reload;
         public InputAction @Modifire => m_Wrapper.m_Player_Modifire;
         public InputAction @Record => m_Wrapper.m_Player_Record;
+        public InputAction @KeyEngine => m_Wrapper.m_Player_KeyEngine;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -339,6 +362,9 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
                 @Record.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRecord;
                 @Record.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRecord;
                 @Record.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRecord;
+                @KeyEngine.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnKeyEngine;
+                @KeyEngine.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnKeyEngine;
+                @KeyEngine.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnKeyEngine;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -361,6 +387,9 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
                 @Record.started += instance.OnRecord;
                 @Record.performed += instance.OnRecord;
                 @Record.canceled += instance.OnRecord;
+                @KeyEngine.started += instance.OnKeyEngine;
+                @KeyEngine.performed += instance.OnKeyEngine;
+                @KeyEngine.canceled += instance.OnKeyEngine;
             }
         }
     }
@@ -406,6 +435,7 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
         void OnReload(InputAction.CallbackContext context);
         void OnModifire(InputAction.CallbackContext context);
         void OnRecord(InputAction.CallbackContext context);
+        void OnKeyEngine(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

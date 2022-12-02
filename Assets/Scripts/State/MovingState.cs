@@ -24,6 +24,8 @@ namespace GB_Asteroids.State
             
             _move.Enable();
             _offEngine.Enable();
+
+            Debug.Log("Двигатель включен");
         }
 
         public override void Input()
@@ -48,14 +50,19 @@ namespace GB_Asteroids.State
         public override void PhysicsUpdate()
         {
             base.PhysicsUpdate();
+
+            unit.Engine.MoveModel.Move(unit.RigidBody, unit.Transform.up * _input.y * unit.Engine.Power);
+
+            unit.Rotator.Rotate(unit.RigidBody, Vector3.back * _input.x);
         }
 
         public override void Exit()
         {
             base.Exit();
-            
+
             _move.Disable();
             _offEngine.Disable();
+
         }
 
     }

@@ -1,18 +1,18 @@
+using GB_Asteroids.State;
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace GB_Asteroids 
+namespace GB_Asteroids
 {
     public class PlayerController : IExecute
     {
-        private PlayerModel _playerModel;     
+        private PlayerModel _playerModel;
         private PlayerView _playerView;
 
 
         PlayerAction _inputActions;
-        
-        private InputAction _move;
+
         private InputAction _fire;
         private InputAction _laserSight;
         private InputAction _reload;
@@ -22,6 +22,8 @@ namespace GB_Asteroids
 
         public PlayerController(PlayerView view)
         {
+            _inputActions = new PlayerAction();
+
             _playerView = view;
             _playerModel = new PlayerModel(_playerView)
             {
@@ -29,31 +31,41 @@ namespace GB_Asteroids
                 Rotator = new RotatorModel(_playerView.Rotator.RotationSpeed)
             };
 
-            _playerModel.Modifier.Add(new SpeedModifier(_playerModel, 5));
-            _playerModel.Modifier.Add(new AtackModifire(_playerModel, 5, 50));
-            _playerModel.Modifier.Add(new HealthModifier(_playerModel, 10));
+            SetStateMachine();
+
+            SetModifire();
 
             SetActions();
         }
 
         public void Execute()
         {
-            Vector3 inputVector = _move.ReadValue<Vector2>();
-
-            ChangePosition(inputVector);
-            ChangeRotation(inputVector);        
+            _playerModel.MovementSM.CurrentState.Input();
+            _playerModel.MovementSM.CurrentState.LogicUpdate();
         }
 
         public void FixedExecute()
         {
-
+            _playerModel.MovementSM.CurrentState.PhysicsUpdate();
         }
 
-        private void SetActions() 
+        private void SetStateMachine() 
         {
-            _inputActions = new PlayerAction();
+            _playerModel.MovementSM = new StateMachine();
+            _playerModel.Moving = new MovingState(_playerModel, _playerModel.MovementSM, _inputActions);
+            _playerModel.Idle = new IdleState(_playerModel, _playerModel.MovementSM, _inputActions);
+            _playerModel.MovementSM.Initialize(_playerModel.Moving);
+        }
 
-            _move = _inputActions.Player.Movement;
+        private void SetModifire() 
+        {
+            _playerModel.Modifier.Add(new SpeedModifier(_playerModel, 5));
+            _playerModel.Modifier.Add(new AtackModifire(_playerModel, 5, 50));
+            _playerModel.Modifier.Add(new HealthModifier(_playerModel, 10));
+        }
+
+        private void SetActions()
+        {
             _fire = _inputActions.Player.Fire;
             _laserSight = _inputActions.Player.LaserSight;
             _reload = _inputActions.Player.Reload;
@@ -68,17 +80,7 @@ namespace GB_Asteroids
         }
 
 
-        private void ChangePosition(Vector3 input) 
-        {
-            _playerModel.Move(_playerView.Rigidbody, _playerView.transform.up * input.y * _playerModel.Engine.Power);
-        }
-
-        private void ChangeRotation(Vector3 input) 
-        {
-            _playerModel.Rotate(_playerView.Rigidbody, Vector3.back * input.x);
-        }
-
-        private void AddModifire() 
+        private void AddModifire()
         {
             ModifireType modifire = (ModifireType)UnityEngine.Random.Range(0, 4);
             Debug.Log($"add {modifire} modifire");
@@ -87,7 +89,6 @@ namespace GB_Asteroids
 
         private void OnEnable()
         {
-            _move.Enable();
             _fire.Enable();
             _laserSight.Enable();
             _reload.Enable();
@@ -96,13 +97,11 @@ namespace GB_Asteroids
 
         private void OnDisable()
         {
-            _move.Disable();
             _fire.Disable();
             _laserSight.Disable();
             _reload.Disable();
             _modifire.Disable();
         }
-
 
         ~PlayerController() => OnDisable();
     }

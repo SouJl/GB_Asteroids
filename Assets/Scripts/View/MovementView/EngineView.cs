@@ -22,33 +22,5 @@ namespace GB_Asteroids
         public ForceMode ForceMode { get => _forceMode; set => _forceMode = value; }
 
         private MovementType _prevType = MovementType.None;
-
-        private void OnDrawGizmos()
-        {
-            if (_type != _prevType) 
-            {
-                switch (Type)
-                {
-                    default: 
-                        {
-                            Power = 0;
-                            break;
-                        }
-
-                    case MovementType.Force:
-                        {
-                            Power = 1;
-                            break;
-                        }
-                    case MovementType.Dash:
-                        {
-                            Power = 300;
-                            break;
-                        }
-                }
-
-                _prevType = _type;
-            }          
-        }
     }
 }

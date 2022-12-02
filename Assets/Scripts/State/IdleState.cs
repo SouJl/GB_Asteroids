@@ -1,4 +1,5 @@
-﻿using UnityEngine.InputSystem;
+﻿using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace GB_Asteroids.State
 {
@@ -19,6 +20,8 @@ namespace GB_Asteroids.State
             _startEngine.Enable();
 
             _isStartEngine = false;
+
+            Debug.Log("Двигатель выключен");
         }
 
         public override void Input()

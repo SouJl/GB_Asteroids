@@ -8,12 +8,8 @@ namespace GB_Asteroids
         public HealthModel Health { get; set; }
         private UnitModifier _modifier;
 
-        private IEngine _engine;
-        private IRotation _rotator;
         private IWeapon _weapon;
 
-        public IEngine Engine { get => _engine; set => _engine = value; }
-        public IRotation Rotator { get => _rotator; set => _rotator = value; }
         public IWeapon Weapon { get => _weapon; set => _weapon = value; }
         public UnitModifier Modifier { get => _modifier; set => _modifier = value; }
 
@@ -25,7 +21,10 @@ namespace GB_Asteroids
         private bool _laserSightState = false;
 
         public PlayerModel(PlayerView view)
-        {         
+        {
+            Transform = view.transform;
+            RigidBody = view.Rigidbody;
+
             Health = new HealthModel(view.Hp);
 
             Modifier = new UnitModifier(this);
